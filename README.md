@@ -4,8 +4,9 @@ An end-to-end pipeline for extracting insights from documents. Ingests PDFs, bui
 
 ## Current Status
 
-✅ **Phase 1 Complete**: PDF parsing, chunking, and LLM-based graph extraction  
-🚧 **Phase 2 (In Progress)**: Neo4j ingestion (handled by teammate)
+**Phase 1 Complete**: PDF parsing and chunking  
+**Phase 2 Complete**: LLM-based entity and relationship extraction  
+**Phase 3 (In Progress)**: Neo4j ingestion
 
 ## Architecture
 
@@ -26,8 +27,8 @@ pdf-graphrag/
 2. **Ollama** (for local LLM)
    ```bash
    # Install Ollama from https://ollama.ai
-   # Then pull a model (e.g., llama3.1 or phi3)
-   ollama pull llama3.1
+   # Then pull a model (e.g., gemma3 or llama3.1)
+   ollama pull gemma3:12b
    ```
 
 ### Installation
@@ -58,7 +59,7 @@ This will:
 
 Edit `pipeline.py` to customize:
 - `INPUT_PDF`: Path to your PDF file
-- `MODEL`: Ollama model to use (`llama3.1`, `phi3`, `mistral`, etc.)
+- `MODEL`: Ollama model to use (default: `gemma3:12b`)
 
 ### Run Individual Components
 
@@ -102,7 +103,7 @@ This format is ready for Neo4j ingestion.
 
 ## Notes
 
-- All documentation verified as of November 22, 2025
-- Code follows official Docling and Ollama patterns
+- Tested with gemma3:12b on ASU Sol supercomputer (A100 GPU)
+- Code follows official Docling and Ollama documentation
 - Minimal, functional design with no over-engineering
 

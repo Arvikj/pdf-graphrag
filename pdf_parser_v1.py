@@ -57,8 +57,8 @@ def main():
     with (OUT_DIR / f"{doc_filename}.md").open("w", encoding="utf-8") as fp:
         fp.write(doc.export_to_markdown())
 
-    print(f"✓ Converted: {INPUT_PDF}")
-    print(f"  Saved: {doc_filename}.json, .md")
+    print(f"Converted: {INPUT_PDF}")
+    print(f"Saved: {doc_filename}.json, .md")
 
 if __name__ == "__main__":
     main()
