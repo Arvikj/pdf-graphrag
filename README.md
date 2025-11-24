@@ -31,6 +31,11 @@ pdf-graphrag/
 - **Ollama** (for local LLM)
 
 ## Installation
+## 🛠️ Prerequisites
+- **Python 3.9+**
+- **Node.js 16+** & **npm**
+
+## 📦 Installation
 
 ### 1. Clone the Repository
 ```bash
@@ -39,6 +44,8 @@ cd pdf-graphrag
 ```
 
 ### 2. Backend Setup
+The backend is built with FastAPI and handles PDF processing.
+
 ```bash
 # Create a virtual environment
 python3 -m venv venv
@@ -61,12 +68,19 @@ ollama pull gemma3:12b
 ```
 
 ### 4. Frontend Setup
+pip install fastapi uvicorn python-multipart docling
+```
+
+### 3. Frontend Setup
+The frontend is a React application using Vite.
+
 ```bash
 cd frontend
 npm install
 ```
 
 ## Running the Application
+## 🏃‍♂️ Running the Application
 
 You need to run the **Backend** and **Frontend** in two separate terminal windows.
 
@@ -152,3 +166,17 @@ This format is ready for Neo4j ingestion.
 - Code follows official Docling and Ollama documentation
 - Minimal, functional design with no over-engineering
 
+## 📖 Usage
+1.  Open your browser and go to **http://localhost:5173**.
+2.  **Upload**: Drag & drop a PDF file (e.g., from the `Data/` folder) into the upload zone.
+3.  **Process**: Watch the status stepper as the backend parses your file.
+4.  **Chat**: Once "Ready!", you will be taken to the Chat interface. Type a question to test it out.
+5.  **Graph**: Click "Knowledge Graph" in the sidebar to view the visualization placeholder.
+
+## 📂 Project Structure
+- `backend/`: FastAPI application and parsing logic.
+    - `api/`: API endpoints (`/upload`, `/chat`).
+    - `services/`: Core logic (PDF parsing).
+- `frontend/`: React application.
+    - `src/components/`: Reusable UI components.
+- `uploaded_documents/`: Stores uploaded PDFs and their parsed JSON output.

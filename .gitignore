@@ -20,10 +20,15 @@ ENV/
 .vscode/
 .idea/
 
+venv/
+.venv/
+.env
+
 # Node/Frontend
 node_modules/
 frontend/node_modules/
 frontend/dist/
+.DS_Store
 
 # Project Specific
 uploaded_documents/
