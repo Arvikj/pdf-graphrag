@@ -11,16 +11,25 @@ __pycache__/
 
 # Virtual environments
 venv/
+.venv/
 env/
 ENV/
+.env
 
 # IDE
 .vscode/
 .idea/
 
-# # Output directories
-# results/
-# chunks/
+# Node/Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Project Specific
+uploaded_documents/
+temp_uploads/
+results/
+chunks/
 
 # OS
 .DS_Store
