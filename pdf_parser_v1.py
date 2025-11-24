@@ -16,9 +16,16 @@ INPUT_PDF = "Data/Insurance/Sample Policy Specimen.pdf"
 OUT_DIR = Path("results")
 # --------------------------------------------------------------------------------
 
-def main():
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-
+def parse_pdf(input_pdf: str):
+    """
+    Parse a PDF using Docling with OCR and table structure recognition.
+    
+    Args:
+        input_pdf: Path to the PDF file to parse
+        
+    Returns:
+        DoclingDocument: Parsed document object
+    """
     pipe = PdfPipelineOptions(
         do_ocr=True,
         ocr_options=OcrAutoOptions(),
@@ -32,8 +39,14 @@ def main():
         format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=pipe)}
     )
 
-    result = converter.convert(INPUT_PDF)
-    doc = result.document
+    result = converter.convert(input_pdf)
+    return result.document
+
+
+def main():
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    
+    doc = parse_pdf(INPUT_PDF)
     doc_filename = Path(INPUT_PDF).stem
 
     # Export Docling's native JSON format (contains all structured data)
@@ -44,8 +57,8 @@ def main():
     with (OUT_DIR / f"{doc_filename}.md").open("w", encoding="utf-8") as fp:
         fp.write(doc.export_to_markdown())
 
-    print(f"✓ Converted: {INPUT_PDF}")
-    print(f"  Saved: {doc_filename}.json, .md")
+    print(f"Converted: {INPUT_PDF}")
+    print(f"Saved: {doc_filename}.json, .md")
 
 if __name__ == "__main__":
     main()

@@ -2,6 +2,24 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+
+# Cache
+.cache/
+*.cache
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+.env
+
+# IDE
+.vscode/
+.idea/
+
 venv/
 .venv/
 .env
@@ -16,3 +34,8 @@ frontend/dist/
 uploaded_documents/
 temp_uploads/
 results/
+chunks/
+
+# OS
+.DS_Store
+Thumbs.db

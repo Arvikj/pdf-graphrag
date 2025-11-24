@@ -1,0 +1,11 @@
+# PDF GraphRAG Pipeline - Dependencies
+
+# Core PDF parsing
+docling
+transformers  # Required for HybridChunker
+
+# LLM integration
+ollama
+
+# Data validation
+pydantic
