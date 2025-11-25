@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import time
 import shutil
 import os
-from backend.services.parser import parse_pdf
+from backend.services.pipeline import run_pipeline
 
 router = APIRouter()
 
@@ -31,29 +31,21 @@ async def upload_pdf(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, buffer)
         
         print(f"📂 Saved file to: {file_path}")
-        print("🚀 Starting Docling processing... (This may take a minute)")
+        print("🚀 Starting GraphRAG pipeline... (This may take a minute)")
             
-        # Process the PDF using the real parser
-        parsed_data = parse_pdf(file_path)
-        print(parsed_data)
-        print("✅ Docling processing complete!")
-        
-        # Save the result to a JSON file for verification
-        json_output_path = os.path.join(upload_dir, f"{file.filename}.json")
-        import json
-        with open(json_output_path, "w", encoding="utf-8") as f:
-            json.dump(parsed_data, f, indent=2)
-            
-        print(f"💾 Saved parsed data to: {json_output_path}")
+        # Process the PDF using the pipeline
+        graph_data = run_pipeline(file_path)
+        print("✅ Pipeline processing complete!")
         
         return {
             "filename": file.filename, 
             "status": "success",
             "message": "File processed successfully",
             "data_preview": {
-                "num_pages": len(parsed_data.get("pages", [])),
-                "title": parsed_data.get("title", "Unknown")
-            }
+                "num_nodes": len(graph_data.get("nodes", [])),
+                "num_relationships": len(graph_data.get("relationships", []))
+            },
+            "graph_data": graph_data
         }
     except Exception as e:
         print(f"❌ Error: {str(e)}")

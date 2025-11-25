@@ -5,10 +5,8 @@ from backend.api import endpoints
 app = FastAPI(title="PDF GraphRAG API", description="Backend for PDF Workflow Digitalization", version="0.1.0")
 
 # CORS Setup
-origins = [
-    "http://localhost:5173",  # Vite default port
-    "http://localhost:3000",
-]
+# Allow all origins for dev tunnel compatibility
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,

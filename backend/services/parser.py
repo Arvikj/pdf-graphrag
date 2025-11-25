@@ -9,15 +9,15 @@ from docling.datamodel.pipeline_options import (
 )
 from docling.document_converter import DocumentConverter, PdfFormatOption
 
-def parse_pdf(file_path: str) -> dict:
+def parse_pdf(file_path: str):
     """
-    Parses a PDF file using Docling and returns the structured data as a dictionary.
+    Parses a PDF file using Docling and returns the DoclingDocument object.
     
     Args:
         file_path (str): The absolute path to the PDF file.
         
     Returns:
-        dict: The structured representation of the document.
+        DoclingDocument: The parsed document object (for chunking and graph extraction).
     """
     
     # Configure the pipeline options
@@ -37,7 +37,4 @@ def parse_pdf(file_path: str) -> dict:
 
     # Convert the document
     result = converter.convert(file_path)
-    doc = result.document
-    
-    # Return the export as a dictionary
-    return doc.export_to_dict()
+    return result.document

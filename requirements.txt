@@ -9,3 +9,8 @@ ollama
 
 # Data validation
 pydantic
+
+# Backend API
+fastapi
+uvicorn
+python-multipart

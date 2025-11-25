@@ -57,7 +57,8 @@ const UploadZone = ({ onUploadComplete }) => {
 
         try {
             // Real API call
-            await axios.post('http://localhost:8000/api/upload', formData);
+            // Use relative path so Vite proxy handles it (works for both localhost and dev tunnels)
+            await axios.post('/api/upload', formData);
             console.log("Upload and processing complete");
             setIsUploadFinished(true);
         } catch (err) {
