@@ -4,6 +4,9 @@
 docling
 transformers  # Required for HybridChunker
 
+# Graph database
+neo4j
+
 # LLM integration
 ollama
 

@@ -5,6 +5,10 @@ import time
 import shutil
 import os
 from backend.services.pipeline import run_pipeline
+from backend.services.graph_db import run_cypher
+from dotenv import load_dotenv
+
+load_dotenv()
 
 router = APIRouter()
 
@@ -13,6 +17,10 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     response: str
+
+class QueryRequest(BaseModel):
+    database: str
+    cypher: str
 
 @router.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
@@ -59,3 +67,30 @@ async def chat(request: ChatRequest):
     
     # Dummy response logic
     return {"response": f"This is a dummy response to: '{request.message}'. The system is currently in UI-only mode."}
+
+@router.get("/neo4j/config")
+async def get_config():
+    return {
+        "url": os.getenv("NEO4J_URI"),
+        "user": os.getenv("NEO4J_USER"),
+        "pass": os.getenv("NEO4J_PASSWORD")
+    }
+
+@router.get("/neo4j/databases")
+async def get_databases():
+    records = await run_cypher("system", "SHOW DATABASES")
+    return [r["name"] for r in records if r["name"] not in ("neo4j", "system")]
+
+@router.get("/neo4j/{db}/node-labels")
+async def get_node_labels(db: str):
+    records = await run_cypher(db, "CALL db.labels()")
+    return [r["label"] for r in records]
+
+@router.get("/neo4j/{db}/relationship-types")
+async def get_relationship_types(db: str):
+    records = await run_cypher(db, "CALL db.relationshipTypes()")
+    return [r["relationshipType"] for r in records]
+
+@router.get("/neo4j/{db}/query")
+async def run_query(db: str, query: str):
+    return await run_cypher(db, query)

@@ -69,7 +69,16 @@ ollama pull gemma3:12b
 > ollama pull llama3.2    # Alternative lightweight model available in 1b or 3b parameters
 > ```
 
-### 4. Frontend Setup
+### 4. Neo4j Setup (Local Machine)
+```bash
+# Install Neo4j Desktop from https://neo4j.com/download/, create a new local instance, and run it
+# Create a .env with the following configurations
+NEO4J_URI=<Your Connection URI Here>
+NEO4J_USER=<Your Username Here>
+NEO4J_PASSWORD=<Your Password Here>
+```
+
+### 5. Frontend Setup
 The frontend is a React application using Vite.
 
 ```bash

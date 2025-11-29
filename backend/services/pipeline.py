@@ -8,7 +8,7 @@ import logging
 import time
 from pathlib import Path
 from ollama import Client
-from docling.chunking import HybridChunker
+from docling_core.transforms.chunker.hybrid_chunker import HybridChunker
 from docling_core.transforms.chunker.tokenizer.huggingface import HuggingFaceTokenizer
 from transformers import AutoTokenizer
 from .parser import parse_pdf
