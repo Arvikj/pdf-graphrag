@@ -6,9 +6,12 @@ transformers  # Required for HybridChunker
 
 # Graph database
 neo4j
+neo4j-graphrag>=0.1.0
 
 # LLM integration
 ollama
+
+dotenv
 
 # Data validation
 pydantic

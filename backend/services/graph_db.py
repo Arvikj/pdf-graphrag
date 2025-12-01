@@ -70,6 +70,7 @@ async def merge_relationships(session: AsyncSession, relationships: List[dict]) 
     return results
 
 async def populate_graph(database: str, graph_data):
+    print(f"Populating database '{database}' with graph data...")
     records = await run_cypher("system", "SHOW DATABASES")
     if database not in [record["name"] for record in records]:
         await run_cypher("system", f"CREATE DATABASE {database}")
@@ -83,6 +84,7 @@ async def populate_graph(database: str, graph_data):
 
 async def run_cypher(database: str, query: str):
     await driver.verify_connectivity()
+    print(f"Running Cypher on database '{database}': {query}")
 
     async with driver.session(database=database) as session:
         result = await session.run(query) # type: ignore
@@ -100,5 +102,8 @@ async def list_node_types(database: str):
         return [record["name"] for record in records if record["name"] not in ("neo4j", "system")]
                 
 # Test populating database
-# with open(Path("results") / "graph_data.json", "r") as data_file:
-#     asyncio.run(populate_graph("insurance", json.load(data_file)))
+if __name__ == "__main__":
+    with open(Path("..") / ".." / "results" / "graph_data.json", "r") as data_file:
+        graph_data = json.load(data_file)
+    
+    asyncio.run(populate_graph("neo4j", graph_data))

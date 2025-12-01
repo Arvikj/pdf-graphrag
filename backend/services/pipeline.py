@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 # Configuration
 OUT_DIR = Path("results")
-MODEL = "gemma3:12b"
+MODEL = "gemma3:1b"
 
 def run_pipeline(pdf_path: str):
     """Main pipeline execution."""

@@ -8,35 +8,70 @@ const KnowledgeGraphView = () => {
     const [selectedDb, setSelectedDb] = useState();
     const [loading, setLoading] = useState(true);
 
-    const renderGraph = (creds, labels, relationships) => {
-        const config = {
-            containerId: "graph",
-            serverDatabase: selectedDb,
-            neo4j: {
-                serverUrl: creds.url,
-                serverUser: creds.user,
-                serverPassword: creds.pass
-            },
-            labels: Object.fromEntries(labels.map(label => 
-                [label, {
-                    label: "id"
-                }]
-            )),
-            relationships: Object.fromEntries(relationships.map(relationship => 
-                [relationship, {
-                    id: 1 // I genuinely have no idea why this is necessary but without it only 1 relationship ever renders
-                }]
-            )),
-            groupAsLabel: true,
-            initialCypher: "MATCH (n)-[r]->(m) RETURN *"
-        };
+    // const renderGraph = (creds, labels, relationships) => {
+    //     const config = {
+    //         containerId: "graph",
+    //         serverDatabase: selectedDb,
+    //         neo4j: {
+    //             serverUrl: creds.url,
+    //             serverUser: creds.user,
+    //             serverPassword: creds.pass
+    //         },
+    //         labels: Object.fromEntries(labels.map(label => 
+    //             [label, {
+    //                 label: "id"
+    //             }]
+    //         )),
+    //         relationships: Object.fromEntries(relationships.map(relationship => 
+    //             [relationship, {
+    //                 id: 1 // I genuinely have no idea why this is necessary but without it only 1 relationship ever renders
+    //             }]
+    //         )),
+    //         groupAsLabel: true,
+    //         initialCypher: "MATCH (n)-[r]->(m) RETURN *"
+    //     };
 
-        let viz = new NeoVis(config);
-        viz.render();
+    //     let viz = new NeoVis(config);
+    //     viz.render();
+    // };
+
+    const renderGraph = (creds, labels, relationships) => {
+    const config = {
+        containerId: "graph",
+        serverDatabase: selectedDb,
+        neo4j: {
+            serverUrl: creds.url,
+            serverUser: creds.user,
+            serverPassword: creds.pass
+        },
+        labels: Object.fromEntries(labels.map(label => 
+            [label, {
+                label: "id", // This refers to properties.id
+                [NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+                    static: {
+                        color: "#4287f5"
+                    }
+                }
+            }]
+        )),
+        relationships: Object.fromEntries(relationships.map(relationship => 
+            [relationship, {
+                thickness: "1",
+                caption: true
+            }]
+        )),
+        initialCypher: "MATCH (n) OPTIONAL MATCH (n)-[r]->(m) RETURN n, r, m"
     };
+    
+    let viz = new NeoVis(config);
+    viz.render();
+};
 
     useEffect(() => {
-        axios.get('/api/neo4j/databases').then(obj => setDatabases(obj.data));
+        axios.get('/api/neo4j/databases').then(obj => {
+            console.log("here",obj);
+            setDatabases(obj.data)
+        });
     }, []);
 
     useEffect(() => {
@@ -46,6 +81,8 @@ const KnowledgeGraphView = () => {
         axios.get('/api/neo4j/config').then(configResponse => {
             axios.get(`/api/neo4j/${selectedDb}/node-labels`).then(labelsResponse => {
                 axios.get(`/api/neo4j/${selectedDb}/relationship-types`).then(relationshipsResponse => {
+                    console.log("configResponse", configResponse);
+                    
                     renderGraph(configResponse.data, labelsResponse.data, relationshipsResponse.data);
                     setLoading(false);
                 });

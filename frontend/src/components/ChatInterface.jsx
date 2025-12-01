@@ -25,16 +25,39 @@ const ChatInterface = () => {
         setInput('');
         setIsTyping(true);
 
-        // Simulate backend delay
-        setTimeout(() => {
+        console.log('hereee');
+        
+
+        // Call backend chat endpoint
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userMsg.text })
+            });
+
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error(text || 'Chat request failed');
+            }
+
+            const data = await res.json();
             const responseMsg = {
                 id: Date.now() + 1,
                 sender: 'system',
-                text: `This is a dummy response to: "${userMsg.text}". In the full version, this would come from the LLM based on the GraphRAG context.`
+                text: data.response || 'No response from server'
             };
             setMessages(prev => [...prev, responseMsg]);
+        } catch (err) {
+            const errorMsg = {
+                id: Date.now() + 1,
+                sender: 'system',
+                text: `Error: ${err.message}`
+            };
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
             setIsTyping(false);
-        }, 1500);
+        }
     };
 
     return (

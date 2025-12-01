@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 # Configuration
 INPUT_PDF = "Data/Insurance/Sample Policy Specimen.pdf"
 OUT_DIR = Path("results")
-MODEL = "gemma3:12b"
+MODEL = "gemma3:1b"
 
 def main():
     """Main pipeline execution."""

@@ -5,7 +5,8 @@ import time
 import shutil
 import os
 from backend.services.pipeline import run_pipeline
-from backend.services.graph_db import run_cypher
+from backend.services.graph_db import run_cypher, populate_graph
+from backend.services.rag_service import answer_query
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -58,15 +59,16 @@ async def upload_pdf(file: UploadFile = File(...)):
     except Exception as e:
         print(f"❌ Error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
-    # Cleanup removed as requested
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    # Simulate processing time
-    time.sleep(0.5)
-    
-    # Dummy response logic
-    return {"response": f"This is a dummy response to: '{request.message}'. The system is currently in UI-only mode."}
+    # Use the default database (configurable via NEO4J_DB env var)
+    print("Received chat request")
+    database = os.getenv("NEO4J_DB", "neo4j")
+
+    # Call the RAG service to retrieve context and generate an answer
+    answer = await answer_query(database, request.message, top_k=5, use_graph_retriever=True)
+    return {"response": answer}
 
 @router.get("/neo4j/config")
 async def get_config():
@@ -78,8 +80,9 @@ async def get_config():
 
 @router.get("/neo4j/databases")
 async def get_databases():
-    records = await run_cypher("system", "SHOW DATABASES")
-    return [r["name"] for r in records if r["name"] not in ("neo4j", "system")]
+    records = await run_cypher("neo4j", "SHOW DATABASES")
+    print("records", records)
+    return [r["name"] for r in records if r["name"] not in ("system")]
 
 @router.get("/neo4j/{db}/node-labels")
 async def get_node_labels(db: str):
