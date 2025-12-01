@@ -1,1594 +1,259 @@
 {
   "nodes": [
     {
-      "id": "massachusetts_mutual_life_insurance_company",
+      "id": "c1_rocksdb",
+      "label": "Concept",
+      "properties": {
+        "name": "RocksDB",
+        "description": "embeddable persistent key-value store",
+        "source_chunk": "chunk_1"
+      }
+    },
+    {
+      "id": "c1_cpp",
+      "label": "Concept",
+      "properties": {
+        "name": "C++",
+        "description": "programming language",
+        "source_chunk": "chunk_1"
+      }
+    },
+    {
+      "id": "c1_facebook",
       "label": "Organization",
       "properties": {
-        "name": "Massachusetts Mutual Life Insurance Company"
+        "name": "Facebook",
+        "source_chunk": "chunk_1"
       }
     },
     {
-      "id": "springfield",
-      "label": "Location",
-      "properties": {
-        "city": "Springfield",
-        "state": "Massachusetts"
-      }
-    },
-    {
-      "id": "massachusetts",
-      "label": "Location",
-      "properties": {
-        "state": "Massachusetts"
-      }
-    },
-    {
-      "id": "xyz_corporation",
+      "id": "c1_linkedin",
       "label": "Organization",
       "properties": {
-        "name": "XYZ CORPORATION"
+        "name": "LinkedIn",
+        "source_chunk": "chunk_1"
       }
     },
     {
-      "id": "massachusetts_mutual_life_insurance_company",
-      "label": "Organization",
-      "properties": {
-        "name": "Massachusetts Mutual Life Insurance Company"
-      }
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {
-        "description": "Group Whole Life Insurance Policy"
-      }
-    },
-    {
-      "id": "address_100_main_street",
-      "label": "Location",
-      "properties": {
-        "street_address": "100 MAIN STREET",
-        "city": "ANYWHERE",
-        "country": "USA"
-      }
-    },
-    {
-      "id": "policy_number_12345",
-      "label": "Concept",
-      "properties": {
-        "number": "12345"
-      }
-    },
-    {
-      "id": "effective_date_january_1_2014",
-      "label": "Date",
-      "properties": {
-        "date": "JANUARY 1, 2014"
-      }
-    },
-    {
-      "id": "any_state",
-      "label": "Location",
-      "properties": {
-        "state": "ANY STATE"
-      }
-    },
-    {
-      "id": "employees",
-      "label": "Concept",
-      "properties": {
-        "description": "Employees"
-      }
-    },
-    {
-      "id": "general_provisions",
-      "label": "Concept",
-      "properties": {
-        "name": "General Provisions"
-      }
-    },
-    {
-      "id": "entire_contract",
-      "label": "Concept",
-      "properties": {
-        "name": "Entire Contract"
-      }
-    },
-    {
-      "id": "right_to_contest",
-      "label": "Concept",
-      "properties": {
-        "name": "Right to Contest"
-      }
-    },
-    {
-      "id": "interim_insurance",
-      "label": "Concept",
-      "properties": {
-        "name": "Interim Insurance"
-      }
-    },
-    {
-      "id": "premiums_and_lapse",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "group_policyholder_requirements",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "group_policyholder_obligations",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "inspection_of_group_policy",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "delivery_of_certificates",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "group_policy_changes",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "termination_of_group_policy",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "who_may_change_group_policy",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "when_group_policy_changes_are_effective",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "insurance_coverage",
-      "label": "Concept",
-      "properties": {
-        "name": "Insurance Coverage"
-      }
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policy"
-      }
-    },
-    {
-      "id": "reinstatement",
-      "label": "Concept",
-      "properties": {
-        "name": "Reinstatement"
-      }
-    },
-    {
-      "id": "amendment_endorsement_rider",
-      "label": "Concept",
-      "properties": {
-        "name": "Amendment, Endorsement, or Rider",
-        "description": "Any form issued which adds, modifies, changes, or deletes any Group Policy or Certificate provision or benefit."
-      }
-    },
-    {
-      "id": "application",
-      "label": "Concept",
-      "properties": {
-        "name": "Application",
-        "description": "The form completed and signed by the Group Policyholder to apply for the Group Policy."
-      }
-    },
-    {
-      "id": "certificate",
-      "label": "Concept",
-      "properties": {
-        "name": "Certificate",
-        "description": "The document issued to each Certificateowner that describes the life insurance coverage under this Group Policy."
-      }
-    },
-    {
-      "id": "certificate_application",
-      "label": "Concept",
-      "properties": {
-        "name": "Certificate Application",
-        "description": "The form completed and signed by the proposed Certificateowner and/or Insured to apply for this life insurance coverage."
-      }
-    },
-    {
-      "id": "certificateowner",
-      "label": "Concept",
-      "properties": {
-        "name": "Certificateowner",
-        "description": "The person who owns a Certificate, as shown in our records."
-      }
-    },
-    {
-      "id": "death_benefit",
-      "label": "Concept",
-      "properties": {
-        "name": "Death Benefit",
-        "description": "The amount of money we will pay when we receive due proof at our Administrative Office that the Insured died while the Certificate was in force."
-      }
-    },
-    {
-      "id": "effective_date",
-      "label": "Concept",
-      "properties": {
-        "name": "Effective Date",
-        "description": "The date this Group Policy begins as shown on the cover page."
-      }
-    },
-    {
-      "id": "eligible_person",
-      "label": "Concept",
-      "properties": {
-        "name": "Eligible Person",
-        "description": "The following individuals are eligible for coverage provided they are included in the eligible class as shown on the Application."
-      }
-    },
-    {
-      "id": "employee",
-      "label": "Concept",
-      "properties": {
-        "name": "Employee",
-        "description": "References to Employee include: employees, members, partners, or directors of the Group Policyholder."
-      }
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policy",
-        "description": "The document issued to the Group Policyholder."
-      }
-    },
-    {
-      "id": "group_policyholder",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policyholder",
-        "description": "The entity shown on the front cover of this Group Policy."
-      }
-    },
-    {
-      "id": "insured",
-      "label": "Concept",
-      "properties": {
-        "name": "Insured",
-        "description": "The person covered for life insurance under the terms of the Certificate."
-      }
-    },
-    {
-      "id": "issue_age",
-      "label": "Concept",
-      "properties": {
-        "name": "Issue Age",
-        "description": "The age of the Insured on the Certificate Date as shown on the Certificate Specifications."
-      }
-    },
-    {
-      "id": "spouse",
-      "label": "Concept",
-      "properties": {
-        "name": "Spouse",
-        "description": "References to a Spouse include civil union or domestic partners if recognized under applicable state law."
-      }
-    },
-    {
-      "id": "massachusetts_mutual_life_insurance_company",
-      "label": "Organization",
-      "properties": {
-        "name": "Massachusetts Mutual Life Insurance Company",
-        "description": "The Insurer that issues this Certificate and pays the benefits upon a claim."
-      }
-    },
-    {
-      "id": "certificateowner_owns_certificate",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "group_policyholder_owns_group_policy",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policy"
-      }
-    },
-    {
-      "id": "group_policyholder",
-      "label": "Organization",
-      "properties": {}
-    },
-    {
-      "id": "certificate",
-      "label": "Concept",
-      "properties": {
-        "name": "Certificate"
-      }
-    },
-    {
-      "id": "application_for_group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Application for the Group Policy"
-      }
-    },
-    {
-      "id": "rider",
-      "label": "Concept",
-      "properties": {
-        "name": "Rider"
-      }
-    },
-    {
-      "id": "endorsement",
-      "label": "Concept",
-      "properties": {
-        "name": "Endorsement"
-      }
-    },
-    {
-      "id": "amendment",
-      "label": "Concept",
-      "properties": {
-        "name": "Amendment"
-      }
-    },
-    {
-      "id": "application",
-      "label": "Concept",
-      "properties": {
-        "name": "Application"
-      }
-    },
-    {
-      "id": "right_to_contest",
-      "label": "Concept",
-      "properties": {
-        "name": "Right to Contest"
-      }
-    },
-    {
-      "id": "application_for_group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Application for the Group Policy"
-      }
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policy"
-      }
-    },
-    {
-      "id": "effective_date",
-      "label": "Concept",
-      "properties": {
-        "name": "Effective Date"
-      }
-    },
-    {
-      "id": "interim_insurance",
-      "label": "Concept",
-      "properties": {
-        "name": "Interim Insurance"
-      }
-    },
-    {
-      "id": "certificate_application",
-      "label": "Concept",
-      "properties": {
-        "name": "Certificate Application"
-      }
-    },
-    {
-      "id": "insured",
-      "label": "Concept",
-      "properties": {
-        "name": "Insured"
-      }
-    },
-    {
-      "id": "premium",
-      "label": "Concept",
-      "properties": {
-        "name": "Premium"
-      }
-    },
-    {
-      "id": "death_benefit",
-      "label": "Concept",
-      "properties": {
-        "name": "Death Benefit"
-      }
-    },
-    {
-      "id": "certificate_date",
-      "label": "Concept",
-      "properties": {
-        "name": "Certificate Date"
-      }
-    },
-    {
-      "id": "ninety_day_period",
-      "label": "Concept",
-      "properties": {
-        "name": "90th day"
-      }
-    },
-    {
-      "id": "requirement_1",
-      "label": "Concept",
-      "properties": {
-        "name": "Agreement to pay premiums"
-      }
-    },
-    {
-      "id": "requirement_2",
-      "label": "Concept",
-      "properties": {
-        "name": "Eligibility and underwriting requirements"
-      }
-    },
-    {
-      "id": "lower_coverage_amount",
-      "label": "Concept",
-      "properties": {
-        "name": "Lower Coverage Amount"
-      }
-    },
-    {
-      "id": "premium",
-      "label": "Concept",
-      "properties": {
-        "name": "Premium"
-      }
-    },
-    {
-      "id": "certificateowner",
-      "label": "Person",
-      "properties": {
-        "name": "Certificateowner"
-      }
-    },
-    {
-      "id": "certificate",
-      "label": "Concept",
-      "properties": {
-        "name": "Certificate"
-      }
-    },
-    {
-      "id": "grace_period",
-      "label": "Concept",
-      "properties": {
-        "name": "Grace Period"
-      }
-    },
-    {
-      "id": "coverage",
-      "label": "Concept",
-      "properties": {
-        "name": "Coverage"
-      }
-    },
-    {
-      "id": "lapse_provisions",
-      "label": "Concept",
-      "properties": {
-        "name": "Lapse Provisions"
-      }
-    },
-    {
-      "id": "payroll_deduction",
-      "label": "Concept",
-      "properties": {
-        "name": "Payroll Deduction"
-      }
-    },
-    {
-      "id": "automated_clearing_house",
-      "label": "Organization",
-      "properties": {
-        "name": "Automated Clearing House (ACH)"
-      }
-    },
-    {
-      "id": "check",
-      "label": "Concept",
-      "properties": {
-        "name": "Check"
-      }
-    },
-    {
-      "id": "group_policyholder",
-      "label": "Organization",
-      "properties": {
-        "name": "Group Policyholder"
-      }
-    },
-    {
-      "id": "benefits_administrator",
-      "label": "Person",
-      "properties": {
-        "name": "Benefits Administrator"
-      }
-    },
-    {
-      "id": "general_provisions",
-      "label": "Concept",
-      "properties": {
-        "name": "General Provisions"
-      }
-    },
-    {
-      "id": "specimen",
-      "label": "Concept",
-      "properties": {
-        "name": "Specimen"
-      }
-    },
-    {
-      "id": "group_policyholder_obligations",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "employees",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "spouses",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "dependent_children",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "grandchildren",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "payroll_deduction_forms",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "insurance",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "records",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "business_hours",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "termination_date",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "premiums",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policy"
-      }
-    },
-    {
-      "id": "employees",
-      "label": "Concept",
-      "properties": {
-        "name": "Employees"
-      }
-    },
-    {
-      "id": "business_hours",
-      "label": "Concept",
-      "properties": {
-        "name": "normal business hours"
-      }
-    },
-    {
-      "id": "certificate",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "certificateowners",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "delivery",
-      "label": "Event",
-      "properties": {}
-    },
-    {
-      "id": "group_policy",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policy"
-      }
-    },
-    {
-      "id": "secretary",
-      "label": "Person",
-      "properties": {
-        "title": "Secretary"
-      }
-    },
-    {
-      "id": "assistant_secretary",
-      "label": "Person",
-      "properties": {
-        "title": "Assistant Secretary"
-      }
-    },
-    {
-      "id": "group_policyholder",
-      "label": "Organization",
-      "properties": {
-        "name": "Group Policyholder"
-      }
-    },
-    {
-      "id": "governing_jurisdiction",
-      "label": "Location",
-      "properties": {
-        "name": "Governing Jurisdiction"
-      }
-    },
-    {
-      "id": "group_policy_changes",
-      "label": "Concept",
-      "properties": {
-        "name": "Group Policy Changes"
-      }
-    },
-    {
-      "id": "effective_date",
-      "label": "Concept",
-      "properties": {
-        "name": "Effective Date"
-      }
-    },
-    {
-      "id": "calendar_month",
-      "label": "Concept",
-      "properties": {
-        "name": "calendar month"
-      }
-    },
-    {
-      "id": "notice",
-      "label": "Concept",
-      "properties": {
-        "name": "notice"
-      }
-    },
-    {
-      "id": "benefits",
+      "id": "c1_myrocks",
       "label": "Concept",
       "properties": {
-        "name": "benefits"
+        "name": "MyRocks",
+        "description": "database storage engine",
+        "source_chunk": "chunk_1"
       }
     },
     {
-      "id": "group_policy",
+      "id": "c1_reddit_database",
       "label": "Concept",
       "properties": {
-        "name": "Group Policy"
+        "name": "Reddit Database",
+        "source_chunk": "chunk_1"
       }
-    },
-    {
-      "id": "group_policyholder",
-      "label": "Organization",
-      "properties": {}
-    },
-    {
-      "id": "insurance_coverage",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "insured",
-      "label": "Person",
-      "properties": {}
-    },
-    {
-      "id": "certificateowner",
-      "label": "Person",
-      "properties": {}
     },
     {
-      "id": "termination_notice_60_days",
+      "id": "c2_rocksdb_7_10_2",
       "label": "Concept",
       "properties": {
-        "duration": "60 days",
-        "type": "advance written notice"
+        "version": "7.10.2",
+        "name": "RocksDB",
+        "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "termination_notice_31_days",
+      "id": "c2_rocksdb",
       "label": "Concept",
       "properties": {
-        "duration": "31 days",
-        "type": "advance written notice"
+        "name": "RocksDB",
+        "description": "Persistent key-value store",
+        "source_chunk": "chunk_2"
       }
-    },
-    {
-      "id": "failure_to_comply",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "applicable_law_or_regulation",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "insurance",
-      "label": "Concept",
-      "properties": {}
-    },
-    {
-      "id": "termination_date",
-      "label": "Concept",
-      "properties": {}
     },
     {
-      "id": "insurance_coverage",
+      "id": "c2_key_value_store",
       "label": "Concept",
       "properties": {
-        "name": "Insurance Coverage"
+        "description": "Persistent key-value store",
+        "source_chunk": "chunk_2"
       }
-    },
-    {
-      "id": "insured_1",
-      "label": "Person",
-      "properties": {}
     },
     {
-      "id": "group_policy",
+      "id": "c2_byte_arrays",
       "label": "Concept",
-      "properties": {
-        "name": "Group Policy"
-      }
-    },
-    {
-      "id": "certificate",
-      "label": "Document",
       "properties": {
-        "name": "Certificate"
+        "type": "data type",
+        "description": "Arbitrary byte arrays",
+        "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "portability_option",
+      "id": "c2_comparator_function",
       "label": "Concept",
       "properties": {
-        "name": "Portability Option"
+        "description": "User-specified comparator function",
+        "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "group_policy",
+      "id": "c2_m1_m2_setups",
       "label": "Concept",
-      "properties": {
-        "name": "Group Policy"
-      }
-    },
-    {
-      "id": "group_policyholder",
-      "label": "Organization",
       "properties": {
-        "name": "Group Policyholder"
+        "description": "M1/M2 setups",
+        "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "group_policy_1",
+      "id": "c2_docker_containers",
       "label": "Concept",
       "properties": {
-        "name": "Group Policy"
+        "description": "Docker containers",
+        "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "certificate_1",
+      "id": "c2_assignment",
       "label": "Concept",
       "properties": {
-        "name": "Certificate"
+        "type": "assignment",
+        "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "employees_1",
+      "id": "c3_rocksdb",
       "label": "Concept",
       "properties": {
-        "name": "Employees"
+        "name": "RocksDB",
+        "description": "Database system",
+        "source_chunk": "chunk_3"
       }
     },
     {
-      "id": "spouse_1",
+      "id": "c3_put",
       "label": "Concept",
       "properties": {
-        "name": "Spouse"
+        "name": "Put",
+        "description": "Write operation in RocksDB",
+        "source_chunk": "chunk_3"
       }
     },
     {
-      "id": "dependent_child_1",
+      "id": "c3_merge",
       "label": "Concept",
       "properties": {
-        "name": "Dependent Child"
+        "name": "Merge",
+        "description": "Write operation in RocksDB",
+        "source_chunk": "chunk_3"
       }
     },
     {
-      "id": "grandchild_1",
+      "id": "c3_write_batch",
       "label": "Concept",
-      "properties": {
-        "name": "Grandchild"
-      }
-    },
-    {
-      "id": "massachusetts_mutual_life_insurance_company",
-      "label": "Organization",
-      "properties": {
-        "name": "Massachusetts Mutual Life Insurance Company"
-      }
-    },
-    {
-      "id": "springfield",
-      "label": "Location",
-      "properties": {
-        "city": "Springfield",
-        "state": "Massachusetts"
-      }
-    },
-    {
-      "id": "massachusetts",
-      "label": "Location",
-      "properties": {
-        "state": "Massachusetts"
-      }
-    },
-    {
-      "id": "massachusetts_mutual_life_insurance_company",
-      "label": "Organization",
-      "properties": {
-        "name": "Massachusetts Mutual Life Insurance Company"
-      }
-    },
-    {
-      "id": "springfield_massachusetts",
-      "label": "Location",
-      "properties": {
-        "name": "Springfield, Massachusetts"
-      }
-    },
-    {
-      "id": "annual_meeting",
-      "label": "Event",
       "properties": {
-        "type": "annual meeting"
+        "name": "WriteBatch",
+        "description": "Write operation in RocksDB",
+        "source_chunk": "chunk_3"
       }
     }
   ],
   "relationships": [
     {
-      "source_id": "massachusetts_mutual_life_insurance_company",
-      "target_id": "springfield",
-      "type": "LOCATED_AT",
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_cpp",
+      "type": "WRITTEN_IN",
       "properties": {
-        "address": "1295 State Street"
+        "purpose": "implementation"
       }
     },
     {
-      "source_id": "springfield",
-      "target_id": "massachusetts",
-      "type": "LOCATED_IN",
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_facebook",
+      "type": "USED_BY",
       "properties": {}
     },
     {
-      "source_id": "group_policy",
-      "target_id": "massachusetts_mutual_life_insurance_company",
-      "type": "ISSUED_BY",
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_linkedin",
+      "type": "USED_BY",
       "properties": {}
     },
     {
-      "source_id": "xyz_corporation",
-      "target_id": "group_policy",
-      "type": "POLICYHOLDER",
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_myrocks",
+      "type": "USED_FOR",
+      "properties": {
+        "purpose": "database storage engine"
+      }
+    },
+    {
+      "source_id": "c1_reddit_database",
+      "target_id": "c1_rocksdb",
+      "type": "USED_IN",
+      "properties": {
+        "context": "assignment"
+      }
+    },
+    {
+      "source_id": "c2_rocksdb_7_10_2",
+      "target_id": "c2_rocksdb",
+      "type": "IS_A",
       "properties": {}
     },
     {
-      "source_id": "group_policy",
-      "target_id": "address_100_main_street",
-      "type": "LOCATED_AT",
-      "properties": {}
+      "source_id": "c2_rocksdb",
+      "target_id": "c2_key_value_store",
+      "type": "IS_A",
+      "properties": {
+        "type": "persistent"
+      }
     },
     {
-      "source_id": "group_policy",
-      "target_id": "policy_number_12345",
-      "type": "HAS_POLICY_NUMBER",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "effective_date_january_1_2014",
-      "type": "HAS_EFFECTIVE_DATE",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "any_state",
-      "type": "STATE_OF_ISSUE",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "employees",
-      "type": "PROVIDES_COVERAGE_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "general_provisions",
-      "target_id": "entire_contract",
+      "source_id": "c2_key_value_store",
+      "target_id": "c2_byte_arrays",
       "type": "CONTAINS",
+      "properties": {
+        "type": "keys and values"
+      }
+    },
+    {
+      "source_id": "c2_key_value_store",
+      "target_id": "c2_comparator_function",
+      "type": "USES",
       "properties": {}
     },
     {
-      "source_id": "general_provisions",
-      "target_id": "right_to_contest",
-      "type": "CONTAINS",
-      "properties": {}
-    },
-    {
-      "source_id": "general_provisions",
-      "target_id": "interim_insurance",
-      "type": "CONTAINS",
-      "properties": {}
-    },
-    {
-      "source_id": "premiums_and_lapse",
-      "target_id": "group_policyholder_requirements",
-      "type": "PRECEDED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_requirements",
-      "target_id": "group_policyholder_obligations",
-      "type": "PRECEDED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "inspection_of_group_policy",
-      "type": "PRECEDED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy_changes",
-      "target_id": "who_may_change_group_policy",
-      "type": "CONTAINS",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy_changes",
-      "target_id": "when_group_policy_changes_are_effective",
-      "type": "CONTAINS",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy_changes",
-      "target_id": "termination_of_group_policy",
-      "type": "CONTAINS",
-      "properties": {}
-    },
-    {
-      "source_id": "insurance_coverage",
-      "target_id": "group_policy",
-      "type": "CONTINUATION_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "reinstatement",
-      "type": "MAY_BE",
-      "properties": {}
-    },
-    {
-      "source_id": "amendment_endorsement_rider",
-      "target_id": "group_policy",
-      "type": "MODIFIES",
-      "properties": {}
-    },
-    {
-      "source_id": "application",
-      "target_id": "group_policy",
-      "type": "RELATES_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "certificate",
-      "target_id": "certificateowner",
-      "type": "ISSUED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "certificate_application",
-      "target_id": "certificateowner",
-      "type": "APPLIES_FOR",
-      "properties": {}
-    },
-    {
-      "source_id": "death_benefit",
-      "target_id": "certificate",
-      "type": "DESCRIBED_IN",
-      "properties": {}
-    },
-    {
-      "source_id": "eligible_person",
-      "target_id": "employee",
-      "type": "INCLUDES",
-      "properties": {}
-    },
-    {
-      "source_id": "employee",
-      "target_id": "group_policyholder",
-      "type": "BELONGS_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "group_policyholder",
-      "type": "ISSUED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "insured",
-      "target_id": "certificate",
-      "type": "COVERED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "issue_age",
-      "target_id": "certificate",
-      "type": "SHOWN_ON",
-      "properties": {}
-    },
-    {
-      "source_id": "spouse",
-      "target_id": "employee",
-      "type": "RELATES_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "massachusetts_mutual_life_insurance_company",
-      "target_id": "certificate",
-      "type": "ISSUES",
-      "properties": {}
-    },
-    {
-      "source_id": "certificateowner",
-      "target_id": "certificate",
-      "type": "OWNS",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "group_policyholder",
-      "type": "IS_BETWEEN",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "certificate",
-      "type": "CONSISTS_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "application_for_group_policy",
-      "type": "CONSISTS_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "rider",
-      "type": "CONSISTS_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "endorsement",
-      "type": "CONSISTS_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "amendment",
-      "type": "CONSISTS_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "application",
-      "target_id": "group_policy",
-      "type": "ATTACHED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "right_to_contest",
-      "target_id": "application_for_group_policy",
-      "type": "RELIED_ON",
-      "properties": {}
-    },
-    {
-      "source_id": "application_for_group_policy",
-      "target_id": "group_policy",
-      "type": "RELATED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "effective_date",
-      "type": "HAS_DATE",
-      "properties": {}
-    },
-    {
-      "source_id": "interim_insurance",
-      "target_id": "certificate_application",
+      "source_id": "c2_assignment",
+      "target_id": "c2_rocksdb_7_10_2",
       "type": "REQUIRES",
       "properties": {}
     },
     {
-      "source_id": "interim_insurance",
-      "target_id": "insured",
-      "type": "PROVIDES",
-      "properties": {
-        "coverage_amount": "applied for"
-      }
-    },
-    {
-      "source_id": "interim_insurance",
-      "target_id": "premium",
-      "type": "AVOIDS",
-      "properties": {
-        "collection": "premium"
-      }
-    },
-    {
-      "source_id": "interim_insurance",
-      "target_id": "requirement_1",
-      "type": "REQUIRES",
+      "source_id": "c2_assignment",
+      "target_id": "c2_docker_containers",
+      "type": "DOES_NOT_PROVIDE",
       "properties": {}
     },
     {
-      "source_id": "interim_insurance",
-      "target_id": "requirement_2",
-      "type": "REQUIRES",
-      "properties": {}
-    },
-    {
-      "source_id": "death_benefit",
-      "target_id": "premium",
-      "type": "REDUCED_BY",
-      "properties": {
-        "reduction_amount": "one month's premium"
-      }
-    },
-    {
-      "source_id": "interim_insurance",
-      "target_id": "certificate_date",
-      "type": "ENDS_WITH",
-      "properties": {}
-    },
-    {
-      "source_id": "interim_insurance",
-      "target_id": "ninety_day_period",
-      "type": "ENDS_WITH",
-      "properties": {}
-    },
-    {
-      "source_id": "interim_insurance",
-      "target_id": "lower_coverage_amount",
-      "type": "PROVIDES",
-      "properties": {}
-    },
-    {
-      "source_id": "premium",
-      "target_id": "certificateowner",
-      "type": "DUE_FOR",
-      "properties": {}
-    },
-    {
-      "source_id": "premium",
-      "target_id": "certificate",
-      "type": "DESCRIBED_IN",
-      "properties": {}
-    },
-    {
-      "source_id": "premium",
-      "target_id": "grace_period",
-      "type": "RELATES_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "coverage",
-      "target_id": "certificate",
-      "type": "PROVIDED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "coverage",
-      "target_id": "lapse_provisions",
-      "type": "SUBJECT_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "lapse_provisions",
-      "target_id": "certificate",
-      "type": "DESCRIBED_IN",
-      "properties": {}
-    },
-    {
-      "source_id": "premium",
-      "target_id": "payroll_deduction",
-      "type": "PAID_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "premium",
-      "target_id": "automated_clearing_house",
-      "type": "PAID_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "premium",
-      "target_id": "check",
-      "type": "PAID_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "premium",
-      "target_id": "group_policyholder",
-      "type": "PAID_TO",
-      "properties": {
-        "payment": "$0.50"
-      }
-    },
-    {
-      "source_id": "premium",
-      "target_id": "benefits_administrator",
-      "type": "PAID_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "employees",
-      "type": "INCLUDES",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "spouses",
-      "type": "INCLUDES",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "dependent_children",
-      "type": "INCLUDES",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "grandchildren",
-      "type": "INCLUDES",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "group_policy",
+      "source_id": "c2_m1_m2_setups",
+      "target_id": "c2_rocksdb",
       "type": "RELATED_TO",
       "properties": {}
     },
     {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "payroll_deduction_forms",
-      "type": "RELATED_TO",
+      "source_id": "c3_rocksdb",
+      "target_id": "c3_put",
+      "type": "SUPPORTS_OPERATION",
       "properties": {}
     },
     {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "insurance",
-      "type": "RELATED_TO",
+      "source_id": "c3_rocksdb",
+      "target_id": "c3_merge",
+      "type": "SUPPORTS_OPERATION",
       "properties": {}
     },
     {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "records",
-      "type": "RELATED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "business_hours",
-      "type": "RELATED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "termination_date",
-      "type": "RELATED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policyholder_obligations",
-      "target_id": "premiums",
-      "type": "RELATED_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "employees",
-      "type": "AVAILABLE_FOR",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "business_hours",
-      "type": "AVAILABLE_DURING",
-      "properties": {}
-    },
-    {
-      "source_id": "delivery",
-      "target_id": "certificate",
-      "type": "DELIVERS",
-      "properties": {}
-    },
-    {
-      "source_id": "certificate",
-      "target_id": "certificateowners",
-      "type": "BELONGS_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "secretary",
-      "type": "MAY_BE_CHANGED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "assistant_secretary",
-      "type": "MAY_BE_CHANGED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "group_policyholder",
-      "type": "CANNOT_BE_CHANGED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "governing_jurisdiction",
-      "type": "SUBJECT_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy_changes",
-      "target_id": "effective_date",
-      "type": "HAS_EFFECTIVE_DATE",
-      "properties": {}
-    },
-    {
-      "source_id": "effective_date",
-      "target_id": "calendar_month",
-      "type": "OCCURS_IN",
-      "properties": {
-        "description": "first day of the calendar month that next follows the date we send notice to you of the change in benefits"
-      }
-    },
-    {
-      "source_id": "notice",
-      "target_id": "benefits",
-      "type": "RELATES_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "group_policyholder",
-      "type": "HAS_HOLDER",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "insurance_coverage",
-      "type": "PROVIDES",
-      "properties": {}
-    },
-    {
-      "source_id": "insurance_coverage",
-      "target_id": "insured",
-      "type": "COVERS",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "termination_notice_60_days",
-      "type": "TERMINATES_WITH",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "termination_notice_31_days",
-      "type": "TERMINATES_WITH",
-      "properties": {}
-    },
-    {
-      "source_id": "termination_notice_31_days",
-      "target_id": "failure_to_comply",
-      "type": "TRIGGERED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "failure_to_comply",
-      "target_id": "group_policy",
-      "type": "RELATES_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "failure_to_comply",
-      "target_id": "applicable_law_or_regulation",
-      "type": "RELATES_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "insurance",
-      "target_id": "group_policy",
-      "type": "IS_TYPE_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "termination_date",
-      "type": "ENDS_ON",
-      "properties": {}
-    },
-    {
-      "source_id": "insurance_coverage",
-      "target_id": "insured_1",
-      "type": "PROVIDES",
-      "properties": {}
-    },
-    {
-      "source_id": "insured_1",
-      "target_id": "group_policy",
-      "type": "ELIGIBLE_FOR",
-      "properties": {}
-    },
-    {
-      "source_id": "insurance_coverage",
-      "target_id": "certificate",
-      "type": "DESCRIBED_IN",
-      "properties": {}
-    },
-    {
-      "source_id": "certificate",
-      "target_id": "portability_option",
-      "type": "CONTAINS",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy",
-      "target_id": "group_policyholder",
-      "type": "REQUESTED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy_1",
-      "target_id": "certificate_1",
-      "type": "CONTAINS_PROVISIONS",
-      "properties": {}
-    },
-    {
-      "source_id": "certificate_1",
-      "target_id": "group_policy_1",
-      "type": "PART_OF",
-      "properties": {}
-    },
-    {
-      "source_id": "group_policy_1",
-      "target_id": "employees_1",
-      "type": "AVAILABLE_TO",
-      "properties": {}
-    },
-    {
-      "source_id": "employees_1",
-      "target_id": "group_policy_1",
-      "type": "COVERED_BY",
-      "properties": {}
-    },
-    {
-      "source_id": "employees_1",
-      "target_id": "spouse_1",
-      "type": "HAS",
-      "properties": {}
-    },
-    {
-      "source_id": "employees_1",
-      "target_id": "dependent_child_1",
-      "type": "HAS",
-      "properties": {}
-    },
-    {
-      "source_id": "employees_1",
-      "target_id": "grandchild_1",
-      "type": "HAS",
-      "properties": {}
-    },
-    {
-      "source_id": "massachusetts_mutual_life_insurance_company",
-      "target_id": "springfield",
-      "type": "LOCATED_IN",
-      "properties": {
-        "address": "1295 State Street",
-        "zip_code": "01111-0001"
-      }
-    },
-    {
-      "source_id": "springfield",
-      "target_id": "massachusetts",
-      "type": "LOCATED_IN",
-      "properties": {}
-    },
-    {
-      "source_id": "massachusetts_mutual_life_insurance_company",
-      "target_id": "springfield_massachusetts",
-      "type": "LOCATED_AT",
-      "properties": {}
-    },
-    {
-      "source_id": "massachusetts_mutual_life_insurance_company",
-      "target_id": "annual_meeting",
-      "type": "HOLDS",
+      "source_id": "c3_rocksdb",
+      "target_id": "c3_write_batch",
+      "type": "SUPPORTS_OPERATION",
       "properties": {}
     }
   ]

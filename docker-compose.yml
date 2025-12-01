@@ -1,0 +1,23 @@
+# Neo4j Docker Compose
+# Start: docker-compose up -d
+# Stop: docker-compose down
+# Access Neo4j Browser: http://localhost:7474
+
+services:
+  neo4j:
+    image: neo4j:5.26.0-community
+    container_name: pdf-graphrag-neo4j
+    ports:
+      - "7474:7474"  # HTTP (Browser)
+      - "7687:7687"  # Bolt (Driver)
+    environment:
+      - NEO4J_AUTH=neo4j/password123
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    restart: unless-stopped
+
+volumes:
+  neo4j_data:
+  neo4j_logs:

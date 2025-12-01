@@ -1,33 +1,36 @@
 # pdf-graphrag
 
-An end-to-end pipeline for extracting insights from documents. Ingests PDFs, builds a knowledge graph, and enables intelligent querying via RAG.
+An end-to-end pipeline for extracting insights from documents. Ingests PDFs, builds a knowledge graph, and enables intelligent querying via GraphRAG.
 
 ## Current Status
 
 **Phase 1 Complete**: PDF parsing and chunking  
 **Phase 2 Complete**: LLM-based entity and relationship extraction  
-**Phase 3 (In Progress)**: Neo4j ingestion
+**Phase 3 Complete**: Neo4j ingestion and GraphRAG
 
 ## Architecture
 
 ```
 pdf-graphrag/
-├── backend/            # FastAPI application and parsing logic
-│   ├── api/           # API endpoints (/upload, /chat)
-│   └── services/      # Core logic (PDF parsing)
-├── frontend/          # React application (Vite)
-│   └── src/components/  # Reusable UI components
-├── pdf_parser_v1.py   # PDF parsing with Docling (OCR + table structure)
-├── graph_models.py    # Pydantic models for Neo4j (Node, Relationship, GraphData)
-├── llm_client.py      # Ollama integration for entity/relationship extraction
-├── pipeline.py        # Main orchestration script
-└── requirements.txt   # Dependencies
+├── backend/               # FastAPI application
+│   ├── api/              # API endpoints (/upload, /chat, /graph)
+│   └── services/         # Core logic
+│       ├── parser.py     # PDF parsing with Docling
+│       ├── pipeline.py   # Main orchestration
+│       ├── llm_client.py # Ollama LLM integration
+│       ├── neo4j_service.py  # Neo4j operations
+│       └── graphrag.py   # GraphRAG query engine
+├── frontend/             # React application (Vite)
+│   └── src/components/   # UI components (including graph visualization)
+├── docker-compose.yml    # Neo4j local setup
+└── requirements.txt      # Dependencies
 ```
 
 ## Prerequisites
 
 - **Python 3.10+**
 - **Node.js 16+** & **npm**
+- **Docker** (for Neo4j)
 - **Ollama** (for local LLM) — or access to ASU Sol Supercomputer
 
 ## 📦 Installation (Local Machine)
@@ -193,19 +196,26 @@ MODEL = "gemma3:4b"  # Change from "gemma3:12b"
 
 ## 🏃‍♂️ Running the Application
 
-You need to run the **Backend** and **Frontend** in two separate terminal windows.
+You need to run **Neo4j**, **Backend**, and **Frontend** in three separate terminal windows.
 
-### Terminal 1: Backend
+### Terminal 1: Neo4j (Docker)
+```bash
+# Start Neo4j using Docker Compose
+docker-compose up -d
+
+# Neo4j Browser available at: http://localhost:7474
+# Default credentials: neo4j / password123
+```
+
+### Terminal 2: Backend
 ```bash
 # Make sure you are in the root directory and venv is activated
-source venv/bin/activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 uvicorn backend.main:app --reload --port 8000
-# alternatively, if that doesn't work, for sol try:
-uvicorn backend.main:app --reload --reload-dir backend --port 8000 --host 0.0.0.0
 ```
 *The backend will start at `http://localhost:8000`*
 
-### Terminal 2: Frontend
+### Terminal 3: Frontend
 ```bash
 cd frontend
 npm run dev
@@ -218,10 +228,10 @@ npm run dev
 1. Open your browser and go to **http://localhost:5173**
 2. **Upload**: Drag & drop a PDF file into the upload zone
 3. **Process**: Watch the status stepper as the backend parses your file
-4. **Chat**: Once "Ready!", type a question to interact with the document
-5. **Graph**: Click "Knowledge Graph" in the sidebar to view the visualization
+4. **Chat**: Once "Ready!", type a question to interact with the document (uses GraphRAG)
+5. **Graph**: Click "Knowledge Graph" in the sidebar to view the interactive visualization
 
-### Via Command Line (Phase 2 Pipeline)
+### Via Command Line
 ```bash
 python pipeline.py
 ```
