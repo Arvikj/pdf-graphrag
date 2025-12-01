@@ -22,13 +22,18 @@ logger = logging.getLogger(__name__)
 OUT_DIR = Path("results")
 
 def run_pipeline(pdf_path: str):
-    """Main pipeline execution."""
+    """
+    Main pipeline execution.
+    Yields progress updates as JSON-compatible dictionaries.
+    """
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     
+    yield {"status": "processing", "step": 1, "message": "Parsing PDF..."}
     logger.info(f"Parsing PDF: {pdf_path}")
     doc = parse_pdf(pdf_path)
     logger.info("PDF parsed successfully")
     
+    yield {"status": "processing", "step": 2, "message": "Chunking text..."}
     logger.info("Setting up HybridChunker with tokenizer...")
     tokenizer = HuggingFaceTokenizer(
         tokenizer=AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2"),
@@ -56,46 +61,38 @@ def run_pipeline(pdf_path: str):
             f.write(text)
             f.write("\n\n---\n\n")
 
+    yield {"status": "processing", "step": 3, "message": "Extracting entities with AI..."}
     logger.info("Starting graph extraction from chunks...")
     all_nodes = []
     all_relationships = []
     
     for i, chunk in enumerate(chunks, 1):
         logger.info(f"Processing chunk {i}/{len(chunks)}")
+        yield {"status": "processing", "step": 3, "message": f"Extracting from chunk {i}/{len(chunks)}..."}
         
-        # Get enriched text with context
         enriched_text = chunker.contextualize(chunk=chunk)
-        
-        # Extract graph data using LLM
         logger.info(f"Sending chunk {i} to Gemini for extraction...")
         graph_data = extract_graph_data(enriched_text)
         logger.info(f"Chunk {i} extraction complete: {len(graph_data.nodes)} nodes, {len(graph_data.relationships)} relationships")
-        
-        # Prefix IDs with chunk number to avoid collisions across chunks
         prefix = f"c{i}_"
         for node in graph_data.nodes:
             node.id = prefix + node.id
-            # Link node to its source chunk
             node.properties["source_chunk"] = f"chunk_{i}"
         for rel in graph_data.relationships:
             rel.source_id = prefix + rel.source_id
             rel.target_id = prefix + rel.target_id
         
-        # Collect results
         all_nodes.extend(graph_data.nodes)
         all_relationships.extend(graph_data.relationships)
     
     logger.info(f"Extraction complete: {len(all_nodes)} total nodes, {len(all_relationships)} total relationships")
     
-    # Aggregate all graph data
     final_graph = GraphData(nodes=all_nodes, relationships=all_relationships)
     
-    # Save to JSON
     output_file = OUT_DIR / "graph_data.json"
     with output_file.open("w", encoding="utf-8") as f:
         f.write(final_graph.model_dump_json(indent=2))
     
-    # Also save chunks for RAG
     chunks_json = OUT_DIR / "chunks.json"
     with chunks_json.open("w", encoding="utf-8") as f:
         json.dump(chunk_texts, f, indent=2)
@@ -103,7 +100,7 @@ def run_pipeline(pdf_path: str):
     logger.info(f"Saved graph data to: {output_file}")
     logger.info(f"Saved chunks to: {chunks_json}")
     
-    # Ingest into Neo4j
+    yield {"status": "processing", "step": 4, "message": "Building Knowledge Graph..."}
     try:
         from .neo4j_service import get_neo4j_service
         neo4j = get_neo4j_service()
@@ -116,4 +113,4 @@ def run_pipeline(pdf_path: str):
     except Exception as e:
         logger.warning(f"Neo4j ingestion skipped: {e}")
     
-    return final_graph.model_dump()
+    yield {"status": "complete", "step": 5, "message": "Ready!", "data": final_graph.model_dump()}

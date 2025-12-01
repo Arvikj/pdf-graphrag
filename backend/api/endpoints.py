@@ -8,6 +8,8 @@ import logging
 from backend.services.pipeline import run_pipeline
 from backend.services.graphrag import graphrag_query
 from backend.services.neo4j_service import get_neo4j_service
+from fastapi.responses import StreamingResponse
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -24,20 +26,16 @@ async def upload_pdf(file: UploadFile = File(...)):
     if not file.filename.endswith('.pdf'):
         raise HTTPException(status_code=400, detail="File must be a PDF")
     
-    # Create a temporary file to save the upload
-    # Create a permanent directory to save the upload
     upload_dir = "uploaded_documents"
     os.makedirs(upload_dir, exist_ok=True)
     file_path = os.path.join(upload_dir, file.filename)
     
     try:
-        # Save the uploaded PDF
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
         
         print(f"📂 Saved file to: {file_path}")
         
-        # Clear existing graph data before processing new PDF
         try:
             neo4j = get_neo4j_service()
             if neo4j.verify_connection():
@@ -48,24 +46,18 @@ async def upload_pdf(file: UploadFile = File(...)):
         
         print("🚀 Starting GraphRAG pipeline... (This may take a minute)")
             
-        # Process the PDF using the pipeline
-        graph_data = run_pipeline(file_path)
-        print("✅ Pipeline processing complete!")
-        
-        return {
-            "filename": file.filename, 
-            "status": "success",
-            "message": "File processed successfully",
-            "data_preview": {
-                "num_nodes": len(graph_data.get("nodes", [])),
-                "num_relationships": len(graph_data.get("relationships", []))
-            },
-            "graph_data": graph_data
-        }
+        async def event_generator():
+            try:
+                for event in run_pipeline(file_path):
+                    yield json.dumps(event) + "\n"
+            except Exception as e:
+                yield json.dumps({"status": "error", "message": str(e)}) + "\n"
+
+        return StreamingResponse(event_generator(), media_type="application/x-ndjson")
+
     except Exception as e:
         print(f"❌ Error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
-    # Cleanup removed as requested
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
@@ -78,7 +70,6 @@ async def chat(request: ChatRequest):
         return {"response": result["answer"]}
     except Exception as e:
         logger.error(f"Chat error: {e}")
-        # Fallback to simple response if Neo4j/Gemini fails
         return {"response": f"I encountered an issue processing your question. Please ensure Neo4j is running (docker-compose up -d) and GEMINI_API_KEY is set. Error: {str(e)}"}
 
 

@@ -10,42 +10,7 @@ const steps = [
     { id: 5, label: 'Ready!', icon: CheckCircle2 },
 ];
 
-const ProcessingStatus = ({ onComplete, isFinished }) => {
-    const [currentStep, setCurrentStep] = useState(1);
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentStep((prev) => {
-                // If we are at the last step (Ready), don't do anything
-                if (prev >= steps.length) {
-                    clearInterval(timer);
-                    return prev;
-                }
-
-                // If we are at the step before Ready (Building Graph), wait for isFinished
-                if (prev === steps.length - 1) {
-                    if (isFinished) {
-                        return prev + 1; // Move to Ready
-                    }
-                    return prev; // Wait here
-                }
-
-                // Otherwise, advance normally
-                return prev + 1;
-            });
-        }, 2000); // 2 seconds per step
-
-        return () => clearInterval(timer);
-    }, [isFinished]);
-
-    // Watch for isFinished to force completion if we're stuck waiting
-    useEffect(() => {
-        if (isFinished && currentStep === steps.length - 1) {
-            setCurrentStep(steps.length);
-        }
-    }, [isFinished, currentStep]);
-
-    // When we reach the last step, trigger onComplete after a delay
+const ProcessingStatus = ({ onComplete, isFinished, currentStep = 1 }) => {
     useEffect(() => {
         if (currentStep === steps.length) {
             const timeout = setTimeout(onComplete, 1000);

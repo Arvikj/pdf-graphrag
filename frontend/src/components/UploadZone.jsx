@@ -46,24 +46,60 @@ const UploadZone = ({ onUploadComplete }) => {
         }
     };
 
+    const [currentStep, setCurrentStep] = useState(1);
     const [isUploadFinished, setIsUploadFinished] = useState(false);
 
     const startUpload = async (file) => {
         setIsProcessing(true);
         setIsUploadFinished(false);
+        setCurrentStep(1);
 
         const formData = new FormData();
         formData.append('file', file);
 
         try {
-            // Real API call
-            // Use relative path so Vite proxy handles it (works for both localhost and dev tunnels)
-            await axios.post('/api/upload', formData);
-            console.log("Upload and processing complete");
-            setIsUploadFinished(true);
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Upload failed: ${response.statusText}`);
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
+                for (const line of lines) {
+                    if (!line.trim()) continue;
+                    try {
+                        const event = JSON.parse(line);
+                        console.log("Event:", event);
+
+                        if (event.status === 'processing') {
+                            setCurrentStep(event.step);
+                        } else if (event.status === 'complete') {
+                            setCurrentStep(5); // Ready
+                            setIsUploadFinished(true);
+                        } else if (event.status === 'error') {
+                            throw new Error(event.message);
+                        }
+                    } catch (e) {
+                        console.error("Error parsing event:", e);
+                    }
+                }
+            }
         } catch (err) {
             console.error("Upload failed", err);
-            setError("Upload failed. Please try again.");
+            setError(`Upload failed: ${err.message}`);
             setIsProcessing(false);
         }
     };
@@ -74,7 +110,7 @@ const UploadZone = ({ onUploadComplete }) => {
     };
 
     if (isProcessing) {
-        return <ProcessingStatus onComplete={handleProcessingComplete} isFinished={isUploadFinished} />;
+        return <ProcessingStatus currentStep={currentStep} onComplete={handleProcessingComplete} isFinished={isUploadFinished} />;
     }
 
     return (
