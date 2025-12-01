@@ -1,0 +1,76 @@
+{
+    "test_cases": [
+        {
+            "query": "What is RocksDB and what programming language is it written in?",
+            "expected_entities": ["RocksDB", "C++", "key-value store"],
+            "expected_relationships": [
+                ["RocksDB", "WRITTEN_IN", "C++"]
+            ],
+            "ground_truth_chunks": [
+                "RocksDB embeddable persistent key-value store",
+                "C++ programming language"
+            ],
+            "expected_answer_keywords": ["RocksDB", "C++", "key-value", "persistent"]
+        },
+        {
+            "query": "Which companies use RocksDB?",
+            "expected_entities": ["RocksDB", "Facebook", "LinkedIn"],
+            "expected_relationships": [
+                ["RocksDB", "USED_BY", "Facebook"],
+                ["RocksDB", "USED_BY", "LinkedIn"]
+            ],
+            "ground_truth_chunks": [
+                "Facebook uses RocksDB",
+                "LinkedIn uses RocksDB"
+            ],
+            "expected_answer_keywords": ["Facebook", "LinkedIn", "companies"]
+        },
+        {
+            "query": "What operations does RocksDB support?",
+            "expected_entities": ["RocksDB", "Put", "Merge", "WriteBatch"],
+            "expected_relationships": [
+                ["RocksDB", "SUPPORTS_OPERATION", "Put"],
+                ["RocksDB", "SUPPORTS_OPERATION", "Merge"],
+                ["RocksDB", "SUPPORTS_OPERATION", "WriteBatch"]
+            ],
+            "ground_truth_chunks": [
+                "Put write operation in RocksDB",
+                "Merge write operation in RocksDB",
+                "WriteBatch write operation in RocksDB"
+            ],
+            "expected_answer_keywords": ["Put", "Merge", "WriteBatch", "operations", "write"]
+        },
+        {
+            "query": "What is MyRocks and how is it related to RocksDB?",
+            "expected_entities": ["RocksDB", "MyRocks", "database storage engine"],
+            "expected_relationships": [
+                ["RocksDB", "USED_FOR", "MyRocks"]
+            ],
+            "ground_truth_chunks": [
+                "MyRocks database storage engine",
+                "RocksDB used for MyRocks"
+            ],
+            "expected_answer_keywords": ["MyRocks", "storage", "engine", "database"]
+        },
+        {
+            "query": "What version of RocksDB is mentioned and what data types does it support?",
+            "expected_entities": ["RocksDB", "7.10.2", "byte arrays", "comparator function"],
+            "expected_relationships": [
+                ["RocksDB", "IS_A", "key-value store"],
+                ["key-value store", "CONTAINS", "byte arrays"]
+            ],
+            "ground_truth_chunks": [
+                "RocksDB version 7.10.2",
+                "Arbitrary byte arrays",
+                "User-specified comparator function"
+            ],
+            "expected_answer_keywords": ["7.10.2", "byte", "arrays", "comparator"]
+        }
+    ],
+    "metadata": {
+        "document_name": "RocksDB_documentation.pdf",
+        "created_date": "2025-12-01",
+        "version": "1.0",
+        "description": "Test cases based on RocksDB documentation for GraphRAG evaluation"
+    }
+}
