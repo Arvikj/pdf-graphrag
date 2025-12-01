@@ -10,38 +10,34 @@ from .graph_models import GraphData
 logger = logging.getLogger(__name__)
 
 
-def extract_graph_data(text: str, model: str = "gemma3:12b") -> GraphData:
+def extract_graph_data(text: str, model: str = "gemma3:1b") -> GraphData:
     """
     Extract entities and relationships from text using a local LLM.
     
     Args:
         text: Input text to extract graph data from
-        model: Ollama model name (default: gemma3:12b)
+        model: Ollama model name (default: gemma3:1b)
         
     Returns:
         GraphData: Extracted nodes and relationships
     """
-    prompt = f"""You are an expert knowledge graph extractor.
-    Task: Extract entities and relationships from the text below to build a property graph.
-    
-    1. Nodes (Entities):
-       - id: unique, lowercase, snake_case identifier.
-       - label: entity type (e.g., Person, Organization, Location, Concept, Event).
-       - properties: meaningful attributes (e.g., names, dates, values, descriptions) as a dictionary.
-       
-    2. Relationships:
-       - source_id: id of the source node.
-       - target_id: id of the target node.
-       - type: relationship type (uppercase, snake_case, e.g., LOCATED_IN).
-       - properties: relationship details (e.g., role, since) as a dictionary.
-       
-    Constraints:
-    - Reuse node IDs exactly for relationships.
-    - Ensure referential integrity: all source_id and target_id values must exist in the nodes list.
-    
-    Input text:
-    {text}
-    """
+    # Prompt based on Neo4j GraphRAG documentation pattern
+    prompt = f"""Extract entities and relationships from the text below.
+
+Return JSON with this format:
+{{"nodes": [{{"id": "0", "label": "Entity type", "properties": {{"name": "Entity name"}}}}],
+ "relationships": [{{"source_id": "0", "target_id": "1", "type": "RELATIONSHIP_TYPE", "properties": {{}}}}]}}
+
+Rules:
+- Assign simple numeric string IDs ("0", "1", "2", etc.) to each node
+- Reuse these exact IDs in relationships
+- Label types: Person, Organization, Location, Concept, Document, Event
+- Include "name" in properties for each node
+- Relationship types should be UPPERCASE_WITH_UNDERSCORES
+
+Input text:
+{text}
+"""
 
     try:
         logger.debug(f"Initializing Ollama client")

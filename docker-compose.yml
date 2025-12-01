@@ -3,8 +3,6 @@
 # Stop: docker-compose down
 # Access Neo4j Browser: http://localhost:7474
 
-version: '3.8'
-
 services:
   neo4j:
     image: neo4j:5.26.0-community

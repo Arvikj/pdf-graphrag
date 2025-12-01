@@ -36,6 +36,16 @@ async def upload_pdf(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, buffer)
         
         print(f"📂 Saved file to: {file_path}")
+        
+        # Clear existing graph data before processing new PDF
+        try:
+            neo4j = get_neo4j_service()
+            if neo4j.verify_connection():
+                neo4j.clear_database()
+                print("🗑️ Cleared existing graph data")
+        except Exception as e:
+            print(f"⚠️ Could not clear Neo4j (will continue): {e}")
+        
         print("🚀 Starting GraphRAG pipeline... (This may take a minute)")
             
         # Process the PDF using the pipeline

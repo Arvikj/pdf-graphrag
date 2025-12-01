@@ -63,12 +63,21 @@ class Neo4jService:
             )
             nodes_created += 1
         
-        # Ingest relationships
+        # Build set of valid node IDs for relationship validation
+        valid_ids = {node.get("id") for node in nodes if node.get("id")}
+        
+        # Ingest relationships (only if both nodes exist)
         rels_created = 0
+        rels_skipped = 0
         for rel in relationships:
             source_id = rel.get("source_id", "")
             target_id = rel.get("target_id", "")
             if not source_id or not target_id:
+                continue
+            
+            # Skip if either node doesn't exist in our node set
+            if source_id not in valid_ids or target_id not in valid_ids:
+                rels_skipped += 1
                 continue
                 
             rel_type = rel.get("type", "RELATED_TO").replace(" ", "_").replace("-", "_").upper()
@@ -86,6 +95,9 @@ class Neo4jService:
                 props=props
             )
             rels_created += 1
+        
+        if rels_skipped > 0:
+            logger.warning(f"Skipped {rels_skipped} relationships with invalid node references")
         
         logger.info(f"Ingested {nodes_created} nodes, {rels_created} relationships")
         return {"nodes_created": nodes_created, "relationships_created": rels_created}
@@ -123,13 +135,12 @@ class Neo4jService:
         return {"nodes": nodes, "relationships": relationships}
     
     def search_nodes(self, query: str, limit: int = 10) -> List[Dict]:
-        """Search nodes by text in id, name, or description."""
+        """Search nodes by text in any property."""
         records, _, _ = self.driver.execute_query(
             """
             MATCH (n)
             WHERE toLower(n.id) CONTAINS $query 
-               OR toLower(coalesce(n.name, '')) CONTAINS $query
-               OR toLower(coalesce(n.description, '')) CONTAINS $query
+               OR any(key IN keys(n) WHERE toLower(toString(n[key])) CONTAINS $query)
             RETURN n.id AS id, labels(n) AS labels, properties(n) AS props
             LIMIT $limit
             """,

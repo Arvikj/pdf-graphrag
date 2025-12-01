@@ -14,7 +14,7 @@ from .neo4j_service import get_neo4j_service
 logger = logging.getLogger(__name__)
 
 # Default model for Ollama
-DEFAULT_MODEL = "gemma3:12b"
+DEFAULT_MODEL = "gemma3:1b"
 
 # ============================================================================
 # GEMINI 2.5 PRO OPTION (commented out - uncomment to use instead of Ollama)
@@ -60,12 +60,11 @@ def format_context(graph_data: Dict) -> str:
             label = node.get("label", "Entity")
             props = node.get("properties", {})
             
-            # Build entity description
-            desc = f"- {label}: {node_id}"
-            if props.get("name"):
-                desc = f"- {label}: {props['name']}"
+            # Use name if available, otherwise use id
+            name = props.get("name") or node_id.replace("_", " ")
+            desc = f"- {label}: {name}"
             if props.get("description"):
-                desc += f" ({props['description']})"
+                desc += f" - {props['description']}"
             
             context_parts.append(desc)
     
@@ -74,9 +73,9 @@ def format_context(graph_data: Dict) -> str:
     if relationships:
         context_parts.append("\n=== RELATIONSHIPS ===")
         for rel in relationships:
-            source = rel.get("source_id", "?")
-            target = rel.get("target_id", "?")
-            rel_type = rel.get("type", "RELATED_TO")
+            source = rel.get("source_id", "?").replace("_", " ")
+            target = rel.get("target_id", "?").replace("_", " ")
+            rel_type = rel.get("type", "RELATED_TO").replace("_", " ")
             context_parts.append(f"- {source} --[{rel_type}]--> {target}")
     
     return "\n".join(context_parts) if context_parts else "No context available."

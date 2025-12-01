@@ -76,12 +76,12 @@ const KnowledgeGraphView = () => {
                         enabled: true,
                         solver: 'forceAtlas2Based',
                         forceAtlas2Based: {
-                            gravitationalConstant: -50,
-                            centralGravity: 0.01,
-                            springLength: 100,
-                            springConstant: 0.08
+                            gravitationalConstant: -30,
+                            centralGravity: 0.005,
+                            springLength: 150,
+                            springConstant: 0.05
                         },
-                        stabilization: { iterations: 100 }
+                        stabilization: { iterations: 150, fit: true }
                     },
                     interaction: {
                         hover: true,
@@ -91,11 +91,15 @@ const KnowledgeGraphView = () => {
                     },
                     nodes: {
                         borderWidth: 2,
-                        shadow: true
+                        shadow: true,
+                        size: 20
                     },
                     edges: {
                         width: 1,
                         shadow: true
+                    },
+                    layout: {
+                        improvedLayout: true
                     }
                 };
 
@@ -105,6 +109,11 @@ const KnowledgeGraphView = () => {
                 }
 
                 networkRef.current = new window.vis.Network(containerRef.current, data, options);
+
+                // Fit to view after stabilization
+                networkRef.current.once('stabilizationIterationsDone', () => {
+                    networkRef.current.fit({ animation: { duration: 500 } });
+                });
 
                 // Handle node selection
                 networkRef.current.on('selectNode', (params) => {

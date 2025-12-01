@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 # Configuration
 OUT_DIR = Path("results")
-MODEL = "gemma3:12b"
+MODEL = "gemma3:1b"
 
 def run_pipeline(pdf_path: str):
     """Main pipeline execution."""
@@ -69,6 +69,14 @@ def run_pipeline(pdf_path: str):
         logger.info(f"Sending chunk {i} to LLM for extraction...")
         graph_data = extract_graph_data(enriched_text, model=MODEL)
         logger.info(f"Chunk {i} extraction complete: {len(graph_data.nodes)} nodes, {len(graph_data.relationships)} relationships")
+        
+        # Prefix IDs with chunk number to avoid collisions across chunks
+        prefix = f"c{i}_"
+        for node in graph_data.nodes:
+            node.id = prefix + node.id
+        for rel in graph_data.relationships:
+            rel.source_id = prefix + rel.source_id
+            rel.target_id = prefix + rel.target_id
         
         # Collect results
         all_nodes.extend(graph_data.nodes)

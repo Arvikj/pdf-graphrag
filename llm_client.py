@@ -10,13 +10,13 @@ from graph_models import GraphData
 logger = logging.getLogger(__name__)
 
 
-def extract_graph_data(text: str, model: str = "gemma3:12b") -> GraphData:
+def extract_graph_data(text: str, model: str = "gemma3:1b") -> GraphData:
     """
     Extract entities and relationships from text using a local LLM.
     
     Args:
         text: Input text to extract graph data from
-        model: Ollama model name (default: gemma3:12b)
+        model: Ollama model name (default: gemma3:1b)
         
     Returns:
         GraphData: Extracted nodes and relationships
