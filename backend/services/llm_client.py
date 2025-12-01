@@ -21,23 +21,33 @@ def extract_graph_data(text: str, model: str = "gemma3:1b") -> GraphData:
     Returns:
         GraphData: Extracted nodes and relationships
     """
-    # Prompt based on Neo4j GraphRAG documentation pattern
-    prompt = f"""Extract entities and relationships from the text below.
+    # Very explicit prompt with complete example for smaller models
+    prompt = f"""Extract a knowledge graph from the text below.
 
-Return JSON with this format:
-{{"nodes": [{{"id": "0", "label": "Entity type", "properties": {{"name": "Entity name"}}}}],
- "relationships": [{{"source_id": "0", "target_id": "1", "type": "RELATIONSHIP_TYPE", "properties": {{}}}}]}}
+EXAMPLE INPUT: "Facebook uses RocksDB for data storage. RocksDB is a key-value store."
 
-Rules:
-- Assign simple numeric string IDs ("0", "1", "2", etc.) to each node
-- Reuse these exact IDs in relationships
-- Label types: Person, Organization, Location, Concept, Document, Event
-- Include "name" in properties for each node
-- Relationship types should be UPPERCASE_WITH_UNDERSCORES
+EXAMPLE OUTPUT:
+{{
+  "nodes": [
+    {{"id": "0", "label": "Organization", "properties": {{"name": "Facebook"}}}},
+    {{"id": "1", "label": "Concept", "properties": {{"name": "RocksDB"}}}},
+    {{"id": "2", "label": "Concept", "properties": {{"name": "key-value store"}}}}
+  ],
+  "relationships": [
+    {{"source_id": "0", "target_id": "1", "type": "USES", "properties": {{}}}},
+    {{"source_id": "1", "target_id": "2", "type": "IS_A", "properties": {{}}}}
+  ]
+}}
 
-Input text:
+IMPORTANT:
+- Every node MUST have "name" in properties
+- You MUST extract relationships between entities
+- Use IDs "0", "1", "2" etc. and reference them in relationships
+
+TEXT:
 {text}
-"""
+
+OUTPUT:"""
 
     try:
         logger.debug(f"Initializing Ollama client")

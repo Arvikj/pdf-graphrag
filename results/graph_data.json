@@ -2,65 +2,74 @@
   "nodes": [
     {
       "id": "c1_0",
-      "label": "Concept",
+      "label": "Introduction",
       "properties": {
-        "name": "RocksDB"
+        "type": "Text",
+        "source_chunk": "chunk_1"
       }
     },
     {
       "id": "c1_1",
-      "label": "Organization",
+      "label": "Concept",
       "properties": {
-        "name": "Facebook"
+        "type": "Text",
+        "source_chunk": "chunk_1"
       }
     },
     {
       "id": "c1_2",
-      "label": "Organization",
+      "label": "Database",
       "properties": {
-        "name": "LinkedIn"
+        "type": "Concept",
+        "source_chunk": "chunk_1"
+      }
+    },
+    {
+      "id": "c1_3",
+      "label": "Key-Value Store",
+      "properties": {
+        "type": "Concept",
+        "source_chunk": "chunk_1"
+      }
+    },
+    {
+      "id": "c1_4",
+      "label": "Reddit",
+      "properties": {
+        "type": "Organization",
+        "source_chunk": "chunk_1"
       }
     },
     {
       "id": "c2_0",
-      "label": "Concept",
+      "label": "Assignment",
       "properties": {
-        "name": "RocksDB"
+        "name": "Creating the setup for RocksDB",
+        "source_chunk": "chunk_2"
       }
     },
     {
       "id": "c2_1",
-      "label": "Organization",
+      "label": "RocksDB",
       "properties": {
-        "name": "RocksDB Project"
-      }
-    },
-    {
-      "id": "c2_2",
-      "label": "Location",
-      "properties": {
-        "name": "Development Environment"
+        "name": "7.10.2",
+        "source_chunk": "chunk_2"
       }
     },
     {
       "id": "c3_0",
-      "label": "Concept",
+      "label": "Operation",
       "properties": {
-        "name": "RocksDB"
+        "type": "Loading Data",
+        "source_chunk": "chunk_3"
       }
     },
     {
       "id": "c3_1",
-      "label": "Document",
-      "properties": {
-        "name": "Loading the Data"
-      }
-    },
-    {
-      "id": "c3_2",
       "label": "Concept",
       "properties": {
-        "name": "Write Operations"
+        "type": "Write Operations",
+        "source_chunk": "chunk_3"
       }
     }
   ],
@@ -68,10 +77,58 @@
     {
       "source_id": "c1_0",
       "target_id": "c1_1",
-      "type": "Association",
+      "type": "Describes",
       "properties": {
-        "type": "Use"
+        "type": "Text"
       }
+    },
+    {
+      "source_id": "c1_1",
+      "target_id": "c1_2",
+      "type": "IS_A",
+      "properties": {
+        "type": "Concept"
+      }
+    },
+    {
+      "source_id": "c1_2",
+      "target_id": "c1_3",
+      "type": "IS_A",
+      "properties": {
+        "type": "Concept"
+      }
+    },
+    {
+      "source_id": "c1_3",
+      "target_id": "c1_4",
+      "type": "USES",
+      "properties": {
+        "type": "Text"
+      }
+    },
+    {
+      "source_id": "c2_0",
+      "target_id": "c2_1",
+      "type": "START_OF",
+      "properties": {}
+    },
+    {
+      "source_id": "c2_1",
+      "target_id": "c2_0",
+      "type": "IS_A",
+      "properties": {}
+    },
+    {
+      "source_id": "c3_0",
+      "target_id": "c3_1",
+      "type": "PARTICIPATES_IN",
+      "properties": {}
+    },
+    {
+      "source_id": "c3_1",
+      "target_id": "c3_0",
+      "type": "HAS_FEATURE",
+      "properties": {}
     }
   ]
 }

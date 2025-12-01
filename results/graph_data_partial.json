@@ -2,9 +2,9 @@
   "nodes": [
     {
       "id": "c1_0",
-      "label": "Concept",
+      "label": "Person",
       "properties": {
-        "name": "RocksDB"
+        "name": "John"
       }
     },
     {
@@ -22,56 +22,103 @@
       }
     },
     {
-      "id": "c2_0",
+      "id": "c1_3",
       "label": "Concept",
       "properties": {
-        "name": "RocksDB"
+        "name": "Key-Value Store"
+      }
+    },
+    {
+      "id": "c1_4",
+      "label": "Document",
+      "properties": {
+        "name": "Subreddits.csv"
+      }
+    },
+    {
+      "id": "c1_5",
+      "label": "Document",
+      "properties": {
+        "name": "Reddit database"
+      }
+    },
+    {
+      "id": "c2_0",
+      "label": "Person",
+      "properties": {
+        "name": "John"
       }
     },
     {
       "id": "c2_1",
       "label": "Organization",
       "properties": {
-        "name": "RocksDB Project"
-      }
-    },
-    {
-      "id": "c2_2",
-      "label": "Location",
-      "properties": {
-        "name": "Development Environment"
-      }
-    },
-    {
-      "id": "c3_0",
-      "label": "Concept",
-      "properties": {
         "name": "RocksDB"
       }
     },
     {
-      "id": "c3_1",
-      "label": "Document",
+      "id": "c2_2",
+      "label": "Concept",
       "properties": {
-        "name": "Loading the Data"
+        "name": "Key-Value Store"
+      }
+    },
+    {
+      "id": "c3_0",
+      "label": "RocksDB",
+      "properties": {
+        "type": "Document"
+      }
+    },
+    {
+      "id": "c3_1",
+      "label": "Data",
+      "properties": {
+        "type": "Concept"
       }
     },
     {
       "id": "c3_2",
-      "label": "Concept",
+      "label": "Write Operations",
       "properties": {
-        "name": "Write Operations"
+        "type": "Concept"
+      }
+    },
+    {
+      "id": "c3_3",
+      "label": "Memtable",
+      "properties": {
+        "type": "Concept"
+      }
+    },
+    {
+      "id": "c3_4",
+      "label": "Write-Ahead Log",
+      "properties": {
+        "type": "Concept"
+      }
+    },
+    {
+      "id": "c3_5",
+      "label": "Compaction",
+      "properties": {
+        "type": "Concept"
+      }
+    },
+    {
+      "id": "c3_6",
+      "label": "High Performance",
+      "properties": {
+        "type": "Concept"
+      }
+    },
+    {
+      "id": "c3_7",
+      "label": "Low Latency",
+      "properties": {
+        "type": "Concept"
       }
     }
   ],
-  "relationships": [
-    {
-      "source_id": "c1_0",
-      "target_id": "c1_1",
-      "type": "Association",
-      "properties": {
-        "type": "Use"
-      }
-    }
-  ]
+  "relationships": []
 }
