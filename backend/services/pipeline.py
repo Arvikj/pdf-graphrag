@@ -7,7 +7,6 @@ import json
 import logging
 import time
 from pathlib import Path
-from ollama import Client
 from docling.chunking import HybridChunker
 from docling_core.transforms.chunker.tokenizer.huggingface import HuggingFaceTokenizer
 from transformers import AutoTokenizer
@@ -21,7 +20,6 @@ logger = logging.getLogger(__name__)
 
 # Configuration
 OUT_DIR = Path("results")
-MODEL = "gemma3:1b"
 
 def run_pipeline(pdf_path: str):
     """Main pipeline execution."""
@@ -69,8 +67,8 @@ def run_pipeline(pdf_path: str):
         enriched_text = chunker.contextualize(chunk=chunk)
         
         # Extract graph data using LLM
-        logger.info(f"Sending chunk {i} to LLM for extraction...")
-        graph_data = extract_graph_data(enriched_text, model=MODEL)
+        logger.info(f"Sending chunk {i} to Gemini for extraction...")
+        graph_data = extract_graph_data(enriched_text)
         logger.info(f"Chunk {i} extraction complete: {len(graph_data.nodes)} nodes, {len(graph_data.relationships)} relationships")
         
         # Prefix IDs with chunk number to avoid collisions across chunks

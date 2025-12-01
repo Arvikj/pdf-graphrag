@@ -5,7 +5,8 @@ docling
 transformers  # Required for HybridChunker
 
 # LLM integration
-ollama
+google-genai
+python-dotenv
 
 # Data validation
 pydantic
@@ -17,6 +18,3 @@ python-multipart
 
 # Neo4j integration
 neo4j
-
-# Optional: Gemini API (uncomment if using Gemini instead of Ollama)
-# google-genai

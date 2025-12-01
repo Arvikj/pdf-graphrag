@@ -78,8 +78,8 @@ async def chat(request: ChatRequest):
         return {"response": result["answer"]}
     except Exception as e:
         logger.error(f"Chat error: {e}")
-        # Fallback to simple response if Neo4j/LLM fails
-        return {"response": f"I encountered an issue processing your question. Please ensure Neo4j is running (docker-compose up -d) and Ollama is available. Error: {str(e)}"}
+        # Fallback to simple response if Neo4j/Gemini fails
+        return {"response": f"I encountered an issue processing your question. Please ensure Neo4j is running (docker-compose up -d) and GEMINI_API_KEY is set. Error: {str(e)}"}
 
 
 @router.get("/graph")

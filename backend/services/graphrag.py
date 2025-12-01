@@ -1,15 +1,29 @@
 """
-GraphRAG Service - Simple RAG using document chunks + LLM.
+GraphRAG Service - Simple RAG using document chunks + Gemini.
+
+Uses google-genai SDK with Gemini 2.5 Flash.
 """
 import logging
+import time
+import os
+from pathlib import Path
 from typing import Dict
-from ollama import Client
+from dotenv import load_dotenv
+from google import genai
 
 from .neo4j_service import get_neo4j_service
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_MODEL = "gemma3:1b"
+# Load .env from project root
+env_path = Path(__file__).parent.parent.parent / ".env"
+load_dotenv(env_path)
+
+# Initialize client with API key from .env
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+# Model for chat/RAG
+CHAT_MODEL = "gemini-2.5-flash"
 
 # Stop words for keyword extraction
 STOP_WORDS = {
@@ -20,28 +34,32 @@ STOP_WORDS = {
 }
 
 
-def query_ollama(prompt: str, model: str = DEFAULT_MODEL) -> str:
-    """Query Ollama LLM."""
-    try:
-        client = Client()
-        response = client.chat(
-            model=model,
-            messages=[{"role": "user", "content": prompt}],
-            options={"temperature": 0.3, "num_predict": 1024}
-        )
-        return response["message"]["content"]
-    except Exception as e:
-        logger.error(f"Ollama query failed: {e}")
-        raise
+def query_gemini(prompt: str, model: str = CHAT_MODEL) -> str:
+    """Query Gemini with 60s retry on rate limit."""
+    while True:
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt
+            )
+            return response.text
+        except Exception as e:
+            error_str = str(e).lower()
+            if "429" in str(e) or "resource_exhausted" in error_str or "rate" in error_str:
+                logger.warning("Rate limit hit, waiting 60s before retry...")
+                time.sleep(60)
+                continue
+            logger.error(f"Gemini query failed: {e}")
+            raise
 
 
-def graphrag_query(question: str, model: str = DEFAULT_MODEL) -> Dict:
+def graphrag_query(question: str, model: str = CHAT_MODEL) -> Dict:
     """
     Answer a question using document chunks as context.
     
     1. Extract keywords from question
     2. Search chunks by keyword
-    3. Send chunk text + question to LLM
+    3. Send chunk text + question to Gemini
     """
     neo4j = get_neo4j_service()
     
@@ -66,7 +84,7 @@ def graphrag_query(question: str, model: str = DEFAULT_MODEL) -> Dict:
     
     # Build prompt
     prompt = f"""Answer the question using ONLY the following document context.
-Be concise. If the answer is not in the context, say "I don't have enough information."
+Be concise and specific. Quote relevant details. If the answer is not in the context or cannot be reliably inferred from it, say "I don't have enough information."
 
 DOCUMENT CONTEXT:
 {context}
@@ -75,7 +93,7 @@ QUESTION: {question}
 
 ANSWER:"""
 
-    answer = query_ollama(prompt, model)
+    answer = query_gemini(prompt, model)
     
     return {
         "answer": answer,
@@ -84,7 +102,6 @@ ANSWER:"""
     }
 
 
-def simple_chat(message: str, model: str = DEFAULT_MODEL) -> str:
+def simple_chat(message: str, model: str = CHAT_MODEL) -> str:
     """Simple chat without document context."""
-    prompt = f"You are a helpful assistant. Answer: {message}"
-    return query_ollama(prompt, model)
+    return query_gemini(f"You are a helpful assistant. Answer: {message}", model)

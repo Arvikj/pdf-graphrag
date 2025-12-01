@@ -1,133 +1,259 @@
 {
   "nodes": [
     {
-      "id": "c1_0",
-      "label": "Introduction",
-      "properties": {
-        "type": "Text",
-        "source_chunk": "chunk_1"
-      }
-    },
-    {
-      "id": "c1_1",
+      "id": "c1_rocksdb",
       "label": "Concept",
       "properties": {
-        "type": "Text",
+        "name": "RocksDB",
+        "description": "embeddable persistent key-value store",
         "source_chunk": "chunk_1"
       }
     },
     {
-      "id": "c1_2",
-      "label": "Database",
+      "id": "c1_cpp",
+      "label": "Concept",
       "properties": {
-        "type": "Concept",
+        "name": "C++",
+        "description": "programming language",
         "source_chunk": "chunk_1"
       }
     },
     {
-      "id": "c1_3",
-      "label": "Key-Value Store",
+      "id": "c1_facebook",
+      "label": "Organization",
       "properties": {
-        "type": "Concept",
+        "name": "Facebook",
         "source_chunk": "chunk_1"
       }
     },
     {
-      "id": "c1_4",
-      "label": "Reddit",
+      "id": "c1_linkedin",
+      "label": "Organization",
       "properties": {
-        "type": "Organization",
+        "name": "LinkedIn",
         "source_chunk": "chunk_1"
       }
     },
     {
-      "id": "c2_0",
-      "label": "Assignment",
+      "id": "c1_myrocks",
+      "label": "Concept",
       "properties": {
-        "name": "Creating the setup for RocksDB",
+        "name": "MyRocks",
+        "description": "database storage engine",
+        "source_chunk": "chunk_1"
+      }
+    },
+    {
+      "id": "c1_reddit_database",
+      "label": "Concept",
+      "properties": {
+        "name": "Reddit Database",
+        "source_chunk": "chunk_1"
+      }
+    },
+    {
+      "id": "c2_rocksdb_7_10_2",
+      "label": "Concept",
+      "properties": {
+        "version": "7.10.2",
+        "name": "RocksDB",
         "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "c2_1",
-      "label": "RocksDB",
+      "id": "c2_rocksdb",
+      "label": "Concept",
       "properties": {
-        "name": "7.10.2",
+        "name": "RocksDB",
+        "description": "Persistent key-value store",
         "source_chunk": "chunk_2"
       }
     },
     {
-      "id": "c3_0",
-      "label": "Operation",
+      "id": "c2_key_value_store",
+      "label": "Concept",
       "properties": {
-        "type": "Loading Data",
+        "description": "Persistent key-value store",
+        "source_chunk": "chunk_2"
+      }
+    },
+    {
+      "id": "c2_byte_arrays",
+      "label": "Concept",
+      "properties": {
+        "type": "data type",
+        "description": "Arbitrary byte arrays",
+        "source_chunk": "chunk_2"
+      }
+    },
+    {
+      "id": "c2_comparator_function",
+      "label": "Concept",
+      "properties": {
+        "description": "User-specified comparator function",
+        "source_chunk": "chunk_2"
+      }
+    },
+    {
+      "id": "c2_m1_m2_setups",
+      "label": "Concept",
+      "properties": {
+        "description": "M1/M2 setups",
+        "source_chunk": "chunk_2"
+      }
+    },
+    {
+      "id": "c2_docker_containers",
+      "label": "Concept",
+      "properties": {
+        "description": "Docker containers",
+        "source_chunk": "chunk_2"
+      }
+    },
+    {
+      "id": "c2_assignment",
+      "label": "Concept",
+      "properties": {
+        "type": "assignment",
+        "source_chunk": "chunk_2"
+      }
+    },
+    {
+      "id": "c3_rocksdb",
+      "label": "Concept",
+      "properties": {
+        "name": "RocksDB",
+        "description": "Database system",
         "source_chunk": "chunk_3"
       }
     },
     {
-      "id": "c3_1",
+      "id": "c3_put",
       "label": "Concept",
       "properties": {
-        "type": "Write Operations",
+        "name": "Put",
+        "description": "Write operation in RocksDB",
+        "source_chunk": "chunk_3"
+      }
+    },
+    {
+      "id": "c3_merge",
+      "label": "Concept",
+      "properties": {
+        "name": "Merge",
+        "description": "Write operation in RocksDB",
+        "source_chunk": "chunk_3"
+      }
+    },
+    {
+      "id": "c3_write_batch",
+      "label": "Concept",
+      "properties": {
+        "name": "WriteBatch",
+        "description": "Write operation in RocksDB",
         "source_chunk": "chunk_3"
       }
     }
   ],
   "relationships": [
     {
-      "source_id": "c1_0",
-      "target_id": "c1_1",
-      "type": "Describes",
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_cpp",
+      "type": "WRITTEN_IN",
       "properties": {
-        "type": "Text"
+        "purpose": "implementation"
       }
     },
     {
-      "source_id": "c1_1",
-      "target_id": "c1_2",
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_facebook",
+      "type": "USED_BY",
+      "properties": {}
+    },
+    {
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_linkedin",
+      "type": "USED_BY",
+      "properties": {}
+    },
+    {
+      "source_id": "c1_rocksdb",
+      "target_id": "c1_myrocks",
+      "type": "USED_FOR",
+      "properties": {
+        "purpose": "database storage engine"
+      }
+    },
+    {
+      "source_id": "c1_reddit_database",
+      "target_id": "c1_rocksdb",
+      "type": "USED_IN",
+      "properties": {
+        "context": "assignment"
+      }
+    },
+    {
+      "source_id": "c2_rocksdb_7_10_2",
+      "target_id": "c2_rocksdb",
+      "type": "IS_A",
+      "properties": {}
+    },
+    {
+      "source_id": "c2_rocksdb",
+      "target_id": "c2_key_value_store",
       "type": "IS_A",
       "properties": {
-        "type": "Concept"
+        "type": "persistent"
       }
     },
     {
-      "source_id": "c1_2",
-      "target_id": "c1_3",
-      "type": "IS_A",
+      "source_id": "c2_key_value_store",
+      "target_id": "c2_byte_arrays",
+      "type": "CONTAINS",
       "properties": {
-        "type": "Concept"
+        "type": "keys and values"
       }
     },
     {
-      "source_id": "c1_3",
-      "target_id": "c1_4",
+      "source_id": "c2_key_value_store",
+      "target_id": "c2_comparator_function",
       "type": "USES",
-      "properties": {
-        "type": "Text"
-      }
-    },
-    {
-      "source_id": "c2_0",
-      "target_id": "c2_1",
-      "type": "START_OF",
       "properties": {}
     },
     {
-      "source_id": "c2_1",
-      "target_id": "c2_0",
-      "type": "IS_A",
+      "source_id": "c2_assignment",
+      "target_id": "c2_rocksdb_7_10_2",
+      "type": "REQUIRES",
       "properties": {}
     },
     {
-      "source_id": "c3_0",
-      "target_id": "c3_1",
-      "type": "PARTICIPATES_IN",
+      "source_id": "c2_assignment",
+      "target_id": "c2_docker_containers",
+      "type": "DOES_NOT_PROVIDE",
       "properties": {}
     },
     {
-      "source_id": "c3_1",
-      "target_id": "c3_0",
-      "type": "HAS_FEATURE",
+      "source_id": "c2_m1_m2_setups",
+      "target_id": "c2_rocksdb",
+      "type": "RELATED_TO",
+      "properties": {}
+    },
+    {
+      "source_id": "c3_rocksdb",
+      "target_id": "c3_put",
+      "type": "SUPPORTS_OPERATION",
+      "properties": {}
+    },
+    {
+      "source_id": "c3_rocksdb",
+      "target_id": "c3_merge",
+      "type": "SUPPORTS_OPERATION",
+      "properties": {}
+    },
+    {
+      "source_id": "c3_rocksdb",
+      "target_id": "c3_write_batch",
+      "type": "SUPPORTS_OPERATION",
       "properties": {}
     }
   ]
