@@ -93,4 +93,17 @@ def run_pipeline(pdf_path: str):
     
     logger.info(f"Saved graph data to: {output_file}")
     
+    # Ingest into Neo4j
+    try:
+        from .neo4j_service import get_neo4j_service
+        neo4j = get_neo4j_service()
+        if neo4j.verify_connection():
+            logger.info("Ingesting graph data into Neo4j...")
+            stats = neo4j.ingest_graph(final_graph.model_dump())
+            logger.info(f"Neo4j ingestion complete: {stats}")
+        else:
+            logger.warning("Neo4j not available - skipping ingestion. Start Neo4j with: docker-compose up -d")
+    except Exception as e:
+        logger.warning(f"Neo4j ingestion skipped: {e}")
+    
     return final_graph.model_dump()

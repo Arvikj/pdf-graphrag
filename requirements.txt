@@ -14,3 +14,9 @@ pydantic
 fastapi
 uvicorn
 python-multipart
+
+# Neo4j integration
+neo4j
+
+# Optional: Gemini API (uncomment if using Gemini instead of Ollama)
+# google-genai

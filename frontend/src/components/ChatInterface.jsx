@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Paperclip, Bot, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
 
 const ChatInterface = () => {
     const [messages, setMessages] = useState([
@@ -25,16 +26,25 @@ const ChatInterface = () => {
         setInput('');
         setIsTyping(true);
 
-        // Simulate backend delay
-        setTimeout(() => {
+        try {
+            const response = await axios.post('/api/chat', { message: userMsg.text });
             const responseMsg = {
                 id: Date.now() + 1,
                 sender: 'system',
-                text: `This is a dummy response to: "${userMsg.text}". In the full version, this would come from the LLM based on the GraphRAG context.`
+                text: response.data.response
             };
             setMessages(prev => [...prev, responseMsg]);
+        } catch (error) {
+            console.error('Chat error:', error);
+            const errorMsg = {
+                id: Date.now() + 1,
+                sender: 'system',
+                text: `Error: ${error.response?.data?.detail || 'Failed to get response. Make sure Neo4j and Ollama are running.'}`
+            };
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
             setIsTyping(false);
-        }, 1500);
+        }
     };
 
     return (
