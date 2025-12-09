@@ -287,4 +287,4 @@ This format is ready for Neo4j ingestion.
 
 - Tested with gemma3:12b on ASU Sol supercomputer (A100 GPU)
 - Code follows official Docling and Ollama documentation
-- Minimal, functional design with no over-engineering
+- Current main branch configured and rewritten to support Gemini models via an api key for demo purposes, for the version with a purely local, ollama based implemntation refer to the `phase3-chat-alt` branch.
